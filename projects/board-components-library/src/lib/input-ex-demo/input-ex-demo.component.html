@@ -1,0 +1,86 @@
+<div style="margin-left: 20px;width: 500px;">
+  <lib-input-ex
+    [inputLabel]="'testInputLabel'"
+    [inputBindField]="title"
+    [inputIsRequired]="true"
+    [inputDisabled]="disabled"
+    [inputMaxlength]="3"
+    (commitEvent)="title = $event">
+  </lib-input-ex>
+
+  <lib-input-ex
+    [inputLabel]="'testInputNumber'"
+    [inputBindField]="age"
+    [inputCategory]="2"
+    [inputIsRequired]="true"
+    [inputDisabled]="disabled"
+    [inputMax]="300"
+    (commitEvent)="age = $event">
+  </lib-input-ex>
+
+  <lib-input-ex
+    [inputLabel]="'testInputPassword'"
+    [inputBindField]="password"
+    [inputCategory]="3"
+    [inputIsRequired]="true"
+    [inputDisabled]="disabled"
+    [inputMinlength]="4"
+    [sourcePassword]="true"
+    (commitEvent)="password = $event">
+  </lib-input-ex>
+
+  <lib-input-ex
+    [inputLabel]="'testInputPassword'"
+    [inputBindField]="password"
+    [inputCategory]="3"
+    [inputIsRequired]="true"
+    [inputDisabled]="disabled"
+    [inputMinlength]="4"
+    [verifyPassword]="true"
+    (commitEvent)="password = $event">
+  </lib-input-ex>
+
+  <lib-input-ex
+    [inputLabel]="'testInputEmail'"
+    [inputBindField]="email"
+    [inputCategory]="4"
+    [inputIsRequired]="true"
+    [inputPlaceholder]="'email'"
+    [inputDisabled]="disabled"
+    (commitEvent)="email = $event">
+  </lib-input-ex>
+
+  <lib-input-ex
+    [inputLabel]="'testInputValidator'"
+    [inputBindField]="validator"
+    [inputIsRequired]="true"
+    [inputPlaceholder]="'validator'"
+    [inputDisabled]="disabled"
+    [validatorFns]="[checkControlFun()]"
+    [validatorMessage]="[{key: 'repeat',message:'can not same as title'}]"
+    (commitEvent)="validator = $event">
+  </lib-input-ex>
+
+  <lib-input-ex
+    [inputLabel]="'testInputAsyncValidator'"
+    [inputBindField]="asyncValidator"
+    [inputIsRequired]="true"
+    [inputPlaceholder]="'asyncValidator'"
+    [inputDisabled]="disabled"
+    [validatorAsyncFn]="[checkAsyncControlFun()]"
+    [validatorMessage]="[{key: 'exists',message:'title exists.'}]"
+    (commitEvent)="asyncValidator = $event">
+  </lib-input-ex>
+</div>
+<h5>title:{{title}}</h5>
+<h5>age:{{age}}</h5>
+<h5>password:{{password}}</h5>
+<h5>email:{{email}}</h5>
+<h5>validator:{{validator}}</h5>
+<h5>asyncValidator:{{asyncValidator}}</h5>
+<button class="btn btn-primary" (click)="toggleDisabled()">
+  切换状态
+</button>
+<button class="btn btn-primary" (click)="checkValue()">
+  触发检查
+</button>

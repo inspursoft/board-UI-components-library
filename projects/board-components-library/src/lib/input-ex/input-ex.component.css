@@ -1,0 +1,88 @@
+div.input-ex-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 30px;
+}
+
+label.input-ex-label {
+  white-space: nowrap;
+  text-align: right;
+  text-wrap: none;
+  line-height: 30px;
+}
+
+span.asterisk {
+  color: #FF0000;
+}
+
+label.input-ex-field-container {
+  height: 30px;
+  margin-left: 10px;
+  flex-basis: 100%;
+}
+
+input.input-ex-input {
+  text-align: left;
+  line-height: 30px;
+  min-height: 30px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+input.source-password{
+
+}
+
+input.verify-password{
+
+}
+
+input.input-ex-input.click-model {
+  opacity: 1;
+}
+
+input.input-ex-input.click-model:hover {
+  cursor: pointer;
+}
+
+input::placeholder {
+  color: darkgray !important;
+  font-size: 14px;
+}
+
+input::-moz-placeholder{
+  color: darkgray !important;
+  font-size: 14px;
+}
+
+input::-webkit-input-placeholder{
+  color: darkgray !important;
+  font-size: 14px;
+}
+
+input:-moz-placeholder{
+  color: darkgray !important;
+  font-size: 14px;
+}
+
+input:-ms-input-placeholder{
+  color: darkgray !important;
+  font-size: 14px;
+}
+
+input::-ms-input-placeholder {
+  color: darkgray !important;
+  font-size: 14px;
+}
+
+span.tooltip-content{
+  min-width: 200px;
+}
+
+a.input-ex-icon {
+  margin-left: 5px;
+  flex-basis: 20px;
+}

@@ -1,0 +1,52 @@
+<div class="input-ex-container" [formGroup]="inputFormGroup">
+  <label *ngIf="showLabel"
+         (mousedown)="onEditClick()"
+         (click)="onEditClick()"
+         class="input-ex-label"
+         [style.minWidth.px]="inputLabelMinWidth">
+    {{inputLabel}}:
+  </label>
+  <span *ngIf="inputIsRequired" class="asterisk">*</span>
+  <label aria-haspopup="true"
+         role="tooltip"
+         class="input-ex-field-container tooltip tooltip-md"
+         (mousedown)="onEditClick()"
+         [class.tooltip-validation]="!inputControl.disabled"
+         [class.tooltip-bottom-left]="!inputControl.disabled"
+         [class.invalid]="inputControl.invalid && inputControl.touched">
+    <input #input
+           formControlName="inputControl"
+           class="input-ex-input"
+           [type]="inputFieldTypeName"
+           [class.click-model]="inputControl.enabled && inputType == 2"
+           [class.source-password]="sourcePassword"
+           [class.verify-password]="verifyPassword"
+           (blur)="onInputBlur()"
+           (focus)="onInputFocus()"
+           [title]="inputPlaceholder"
+           [placeholder]="inputPlaceholder">
+    <span *ngIf="inputControl.errors" class="tooltip-content">
+      {{getValidatorMessage(inputControl.errors)}}{{inputValidatorParam}}
+    </span>
+  </label>
+  <a *ngIf="inputStatus == 2 && inputControl.enabled"
+     href="javascript:void(0)"
+     class="input-ex-icon"
+     (click)="onEditClick()">
+    <clr-icon shape="note"></clr-icon>
+  </a>
+  <a *ngIf="inputStatus == 1 && inputControl.enabled"
+     href="javascript:void(0)"
+     class="input-ex-icon"
+     (click)="onCommitClick($event)">
+    <clr-icon shape="check"></clr-icon>
+  </a>
+  <a *ngIf="inputStatus == 1 && inputControl.errors"
+     href="javascript:void(0)"
+     class="input-ex-icon"
+     (click)="onRevertClick()">
+    <clr-icon shape="refresh"></clr-icon>
+  </a>
+  <span *ngIf="inputControl.pending" class="spinner spinner-sm"></span>
+</div>
+

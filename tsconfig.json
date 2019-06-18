@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "board-components-library": [
+        "dist/board-components-library"
+      ],
+      "board-components-library/*": [
+        "dist/board-components-library/*"
+      ]
+    }
   }
 }
