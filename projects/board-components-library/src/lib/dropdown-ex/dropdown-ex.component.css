@@ -1,0 +1,124 @@
+button[clrDropdownItem] {
+  margin-top: 5px;
+  padding: 0;
+}
+
+button[clrDropdownItem]:hover {
+  font-size: 16px;
+}
+
+div.search-container {
+  display: flex;
+  width: 100%;
+  min-height: 30px;
+}
+
+div.search-container input {
+  flex-basis: 100%;
+}
+
+div.search-container clr-icon {
+  height: 20px;
+  flex-basis: 20px;
+  color: darkgreen;
+}
+
+div.search-container clr-icon:hover {
+  cursor: pointer;
+}
+
+div.dropdown-icon {
+  height: 20px;
+  min-width: 20px;
+  margin-left: auto;
+}
+
+div.dropdown-icon clr-icon {
+  height: 20px;
+  width: 20px;
+  color: darkgreen;
+}
+
+div.open-menu {
+  transform: rotate(360deg);
+  transition-duration: 0.5s;
+}
+
+div.close-menu {
+  transform: rotate(180deg);
+  transition-duration: 0.5s;
+}
+
+div.base-show {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  min-height: 30px;
+  display: flex;
+  padding: 5px !important;
+}
+
+clr-dropdown {
+  margin-left: 10px;
+}
+
+div.item-container {
+  margin: 0 5px;
+}
+
+div.multiple-container {
+  margin: 3px 0;
+  flex-basis: 100%;
+}
+
+div.multiple-container:hover {
+  background-color: lightgray;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+div.multiple-container.active {
+  border-radius: 2px;
+  background-color: lightskyblue;
+}
+
+div.multiple-container.active clr-icon {
+  color: darkgreen;
+}
+
+div.base-show.preparing {
+  justify-content: space-around;
+}
+
+div.base-show.preparing span {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+div.base-show.disabled {
+  margin-left: 10px;
+  background-color: lightgrey;
+  justify-content: space-between;
+}
+
+div.base-show.disabled:hover {
+  cursor: not-allowed;
+}
+
+div.base-show {
+  display: flex;
+}
+
+div.base-show.active {
+  background-color: lightgray;
+}
+
+label.label-title {
+  white-space: nowrap;
+  text-align: right;
+  text-wrap: none;
+  line-height: 30px;
+}
+
+label.label-title span {
+  color: red;
+}

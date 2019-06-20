@@ -9,18 +9,7 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-
-enum InputExCategory {
-  iecString = 1, iecNumber, iecPassword, iecEmail
-}
-
-enum InputExType {
-  ietNormal = 1, ietClick, ietNoLabel
-}
-
-enum InputExStatus {
-  iesEdit = 1, iesView
-}
+import { CheckSelfValid, InputExCategory, InputExStatus, InputExType } from '../shared.types';
 
 export class CustomInputExValidators {
   static passwordValidate(c: AbstractControl): ValidationErrors | null {
@@ -39,14 +28,12 @@ export class CustomInputExValidators {
     }
   }
 }
-
 @Component({
   selector: 'lib-input-ex',
   templateUrl: './input-ex.component.html',
   styleUrls: ['./input-ex.component.css']
 })
-
-export class InputExComponent implements OnInit {
+export class InputExComponent implements OnInit, CheckSelfValid {
   private isDisabled = false;
   private revertValue: number | string;
   @Input() inputIsRequired = false;
@@ -240,7 +227,7 @@ export class InputExComponent implements OnInit {
     }
   }
 
-  public checkInputSelf() {
+  public checkSelf() {
     if (this.inputControl.enabled && (this.inputControl.touched || this.inputIsRequired)) {
       this.inputControl.markAsTouched({onlySelf: true});
       this.inputControl.updateValueAndValidity();

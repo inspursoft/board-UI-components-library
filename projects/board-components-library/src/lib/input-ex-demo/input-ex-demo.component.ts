@@ -26,7 +26,7 @@ export class InputExDemoComponent implements OnInit {
   }
 
   checkValue() {
-    this.inputExTitle.checkInputSelf();
+    this.inputExTitle.checkSelf();
   }
 
   checkControlFun() {
