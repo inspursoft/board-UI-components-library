@@ -38,7 +38,6 @@ export class DropdownExDemoComponent {
   }
 
   setActiveCustomItem(item: { name: string, age: number }) {
-    console.log(item);
     this.curSelectCustomItem = item;
   }
 

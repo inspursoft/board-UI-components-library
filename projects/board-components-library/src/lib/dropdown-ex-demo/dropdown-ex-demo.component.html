@@ -1,11 +1,11 @@
 <div style="margin-left: 20px;">
   <lib-dropdown-ex [dropdownLabel]="'Normal demo'"
                    [dropdownItems]="dropdownItem"
-                   [dropdownMenuHeader]="'请选择名字'"
+                   [dropdownMenuHeader]="'Select name'"
                    [dropdownKey]="'name'"
                    [dropdownDisabled]="disabled"
                    [dropdownItemDisabledFn]="dropdownDisabledFn()"
-                   [dropdownTip]="'选择名字...'"
+                   [dropdownTip]="'Select name...'"
                    [dropdownActiveItem]="curSelectItem"
                    (dropdownChangeItem)="setActiveItem($event)">
   </lib-dropdown-ex>
@@ -14,10 +14,10 @@
   <lib-dropdown-ex [dropdownLabel]="'Multiple select demo'"
                    [dropdownModel]="'multiple'"
                    [dropdownItems]="dropdownItem"
-                   [dropdownMenuHeader]="'请选择名字'"
+                   [dropdownMenuHeader]="'Select names'"
                    [dropdownKey]="'name'"
                    [dropdownDisabled]="disabled"
-                   [dropdownTip]="'选择名字...'"
+                   [dropdownTip]="'Select names...'"
                    [dropdownActiveItems]="curSelectItems"
                    (dropdownChangeItem)="setActiveItems($event)">
   </lib-dropdown-ex>
@@ -25,11 +25,11 @@
 <div style="margin-left: 20px;">
   <lib-dropdown-ex [dropdownLabel]="'Custom item demo'"
                    [dropdownItems]="dropdownItem"
-                   [dropdownMenuHeader]="'请选择名字'"
+                   [dropdownMenuHeader]="'Select name'"
                    [dropdownIsRequired]="true"
                    [dropdownKey]="'name'"
                    [dropdownDisabled]="disabled"
-                   [dropdownTip]="'选择名字...'"
+                   [dropdownTip]="'Select name...'"
                    [dropdownActiveItem]="curSelectCustomItem"
                    (dropdownChangeItem)="setActiveCustomItem($event)">
     <ng-template libDropdownExSelector let-name="name" let-age="age">
