@@ -9,6 +9,19 @@
                    [dropdownActiveItem]="curSelectItem"
                    (dropdownChangeItem)="setActiveItem($event)">
   </lib-dropdown-ex>
+  {{curSelectItem?.name}}
+</div>
+<div style="margin-left: 20px;">
+  <lib-dropdown-ex [dropdownLabel]="'Normal demo'"
+                   [dropdownItems]="dropdownItemStr"
+                   [dropdownMenuHeader]="'Select name'"
+                   [dropdownDisabled]="disabled"
+                   [dropdownItemDisabledFn]="dropdownDisabledFn()"
+                   [dropdownTip]="'Select name...'"
+                   [dropdownActiveItem]="curSelectItemStr"
+                   (dropdownChangeItem)="setActiveItemStr($event)">
+  </lib-dropdown-ex>
+  {{curSelectItemStr}}
 </div>
 <div style="margin-left: 20px;">
   <lib-dropdown-ex [dropdownLabel]="'Multiple select demo'"
@@ -21,6 +34,7 @@
                    [dropdownActiveItems]="curSelectItems"
                    (dropdownChangeItem)="setActiveItems($event)">
   </lib-dropdown-ex>
+  {{curSelectItems?.length}}
 </div>
 <div style="margin-left: 20px;">
   <lib-dropdown-ex [dropdownLabel]="'Custom item demo'"
@@ -37,6 +51,7 @@
       <clr-icon shape="info-standard"></clr-icon>
     </ng-template>
   </lib-dropdown-ex>
+  {{curSelectCustomItem?.name}}
 </div>
 <button class="btn btn-primary" (click)="toggleDisabled()">
   切换状态

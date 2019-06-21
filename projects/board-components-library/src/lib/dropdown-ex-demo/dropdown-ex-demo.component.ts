@@ -16,6 +16,8 @@ export class DropdownExDemoComponent {
     {name: 'hello', age: 1},
     {name: 'hello world', age: 2}
   ];
+  dropdownItemStr = ['hello', 'world'];
+  curSelectItemStr = '';
 
   constructor() {
     this.curSelectItems = Array<{ name: string, age: number }>();
@@ -31,6 +33,10 @@ export class DropdownExDemoComponent {
 
   setActiveItem(item: { name: string, age: number }) {
     this.curSelectItem = item;
+  }
+
+  setActiveItemStr(item: string) {
+    this.curSelectItemStr = item;
   }
 
   setActiveItems(items: Array<{ name: string, age: number }>) {

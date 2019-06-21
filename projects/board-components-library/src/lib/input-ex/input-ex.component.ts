@@ -28,6 +28,7 @@ export class CustomInputExValidators {
     }
   }
 }
+
 @Component({
   selector: 'lib-input-ex',
   templateUrl: './input-ex.component.html',
@@ -62,6 +63,7 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   inputFormGroup: FormGroup;
   inputControl: FormControl;
   inputValidatorFns: Array<ValidatorFn>;
+  inputValidatorPending = false;
 
   constructor(private fb: FormBuilder) {
     this.editEvent = new EventEmitter();
@@ -83,6 +85,10 @@ export class InputExComponent implements OnInit, CheckSelfValid {
           Number(this.inputControl.value) : this.inputControl.value;
         this.commitEvent.emit(commitValue);
       }
+      if (this.inputValidatorPending) {
+        this.onInputBlur();
+      }
+      this.inputValidatorPending = value === 'PENDING';
     });
     if (this.validatorFns) {
       this.inputValidatorFns = this.inputValidatorFns.concat(this.validatorFns);
