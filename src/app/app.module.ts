@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from '@clr/angular';
 import { AppComponent } from './app.component';
-import { BoardComponentsLibraryModule } from '../../projects/board-components-library/src/lib/board-components-library.module';
+import { BoardComponentsLibraryModule } from 'board-components-library';
 
 @NgModule({
   declarations: [

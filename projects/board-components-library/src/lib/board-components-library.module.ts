@@ -7,6 +7,9 @@ import { InputExComponent } from './input-ex/input-ex.component';
 import { DropdownExComponent } from './dropdown-ex/dropdown-ex.component';
 import { DropdownExSelectorDirective } from './dropdown-ex/dropdown-ex-selector.directive';
 import { DropdownExDemoComponent } from './dropdown-ex-demo/dropdown-ex-demo.component';
+import { InputDropdownExComponent } from './input-dropdown-ex/input-dropdown-ex.component';
+import { InputDropdownExDemoComponent } from './input-dropdown-ex-demo/input-dropdown-ex-demo.component';
+import { InputDropdownExSelectorDirective } from './input-dropdown-ex/input-dropdown-ex-selector.directive';
 
 @NgModule({
   imports: [
@@ -20,14 +23,20 @@ import { DropdownExDemoComponent } from './dropdown-ex-demo/dropdown-ex-demo.com
     InputExDemoComponent,
     DropdownExComponent,
     DropdownExSelectorDirective,
-    DropdownExDemoComponent
+    DropdownExDemoComponent,
+    InputDropdownExComponent,
+    InputDropdownExDemoComponent,
+    InputDropdownExSelectorDirective
   ],
   exports: [
     InputExComponent,
     InputExDemoComponent,
     DropdownExComponent,
     DropdownExDemoComponent,
-    DropdownExSelectorDirective
+    DropdownExSelectorDirective,
+    InputDropdownExComponent,
+    InputDropdownExDemoComponent,
+    InputDropdownExSelectorDirective
   ]
 })
 export class BoardComponentsLibraryModule {

@@ -5,6 +5,7 @@ export const DROPDOWN_EX_DEFAULT_SHOW_COUNT = 20;
 export type DropdownExModel = 'single' | 'multiple';
 export type DropdownExDisabledFn = (item: any) => boolean;
 export type DropdownExSelectEnableFn = (item: any) => boolean;
+export type InputDropdownExModel = 'sync' | 'async';
 export enum InputExCategory {
   iecString = 1, iecNumber, iecPassword, iecEmail
 }

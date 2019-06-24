@@ -11,8 +11,8 @@
          role="tooltip"
          class="input-ex-field-container tooltip tooltip-md"
          (mousedown)="onEditClick()"
-         [class.tooltip-validation]="!inputControl.disabled"
-         [class.tooltip-bottom-left]="!inputControl.disabled"
+         [class.tooltip-validation]="inputControl.enabled"
+         [class.tooltip-bottom-left]="inputControl.enabled"
          [class.invalid]="inputControl.invalid && inputControl.touched">
     <input #input
            formControlName="inputControl"

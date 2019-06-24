@@ -1,0 +1,55 @@
+<div style="margin-left: 20px;">
+  <lib-input-dropdown-ex [dropdownLabel]="'Normal sync demo'"
+                         [dropdownItems]="dropdownItems"
+                         [dropdownMenuHeader]="'Select name'"
+                         [dropdownKey]="'name'"
+                         [dropdownIsRequired]="true"
+                         [dropdownDisabled]="disabled"
+                         [dropdownItemDisabledFn]="dropdownDisabledFn()"
+                         [inputPlaceholder]="'Select name...'"
+                         [dropdownActiveItem]="curSelectItem"
+                         (dropdownChangeItem)="setActiveItem($event)">
+  </lib-input-dropdown-ex>
+  {{curSelectItem?.name}}
+</div>
+<div style="margin-left: 20px;">
+  <lib-input-dropdown-ex [dropdownLabel]="'Async demo'"
+                         [dropdownItems]="dropdownAsyncItems"
+                         [dropdownMenuHeader]="'Select name'"
+                         [dropdownKey]="'name'"
+                         [dropdownModel]="'async'"
+                         [dropdownDisabled]="disabled"
+                         [dropdownItemDisabledFn]="dropdownDisabledFn()"
+                         [inputPlaceholder]="'Select name...'"
+                         [dropdownActiveItem]="curAsyncSelectItem"
+                         (dropdownRefreshItems)="refreshItems($event)"
+                         (dropdownChangeItem)="setAsyncActiveItem($event)">
+  </lib-input-dropdown-ex>
+  {{curAsyncSelectItem?.name}}
+</div>
+
+<div style="margin-left: 20px;">
+  <lib-input-dropdown-ex [dropdownLabel]="'Custom template demo'"
+                         [dropdownItems]="dropdownCustomAsyncItems"
+                         [dropdownMenuHeader]="'Select name'"
+                         [dropdownKey]="'name'"
+                         [dropdownModel]="'async'"
+                         [dropdownDisabled]="disabled"
+                         [inputPlaceholder]="'Select name...'"
+                         [dropdownActiveItem]="curCustomAsyncSelectItem"
+                         (dropdownRefreshItems)="refreshItems($event)"
+                         (dropdownChangeItem)="setCustomAsyncActiveItem($event)">
+    <ng-template libInputDropdownExSelector let-name="name" let-age="age">
+      Hello->{{name}}:{{age}}
+      <clr-icon shape="info-standard"></clr-icon>
+    </ng-template>
+  </lib-input-dropdown-ex>
+  {{curCustomAsyncSelectItem?.name}}
+</div>
+
+<button class="btn btn-primary" (click)="toggleDisabled()">
+  切换状态
+</button>
+<button class="btn btn-primary" (click)="checkValue()">
+  触发检查
+</button>
