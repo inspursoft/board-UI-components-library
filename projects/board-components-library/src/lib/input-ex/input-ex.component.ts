@@ -134,9 +134,16 @@ export class InputExComponent implements OnInit, CheckSelfValid {
     return this.isDisabled;
   }
 
-  @Input() set inputBindField(value: string | number) {
+  @Input() set inputDefaultValue(value: string | number) {
     this.revertValue = value;
     this.inputControl.setValue(value);
+  }
+
+  @Input() set inputBindObjectField(bind: object) {
+    if (bind && Reflect.has(bind, 'value')) {
+      this.revertValue = Reflect.get(bind, 'value');
+      this.inputControl.setValue(Reflect.get(bind, 'value'), {onlySelf: true});
+    }
   }
 
   get showLabel(): boolean {
@@ -166,26 +173,26 @@ export class InputExComponent implements OnInit, CheckSelfValid {
     });
     if (result === '') {
       if (Reflect.has(errors, 'required')) {
-        result = '字段为必填项';
+        result = 'Input required.';
       } else if (Reflect.has(errors, 'pattern') && this.inputCategory === InputExCategory.iecNumber) {
-        result = '只能输入数字';
+        result = 'Only input number.';
       } else if (Reflect.has(errors, 'pattern') && this.inputCategory === InputExCategory.iecString) {
-        result = '输入不符合规则';
+        result = 'The input does not conform to the rules.';
         this.inputValidatorParam = `:${this.inputPattern}`;
       } else if (Reflect.has(errors, 'maxlength')) {
-        result = `最大长度`;
+        result = `Max length`;
         this.inputValidatorParam = `:${this.inputMaxlength}`;
       } else if (Reflect.has(errors, 'minlength')) {
-        result = `最小长度`;
+        result = `Min length`;
         this.inputValidatorParam = `:${this.inputMinlength}`;
       } else if (Reflect.has(errors, 'max')) {
-        result = `最大值`;
+        result = `Max`;
         this.inputValidatorParam = `:${this.inputMax}`;
       } else if (Reflect.has(errors, 'min')) {
-        result = `最小值`;
+        result = `Min`;
         this.inputValidatorParam = `:${this.inputMin}`;
       } else if (Reflect.has(errors, 'verifyPassword')) {
-        result = `两次密码内容不一致`;
+        result = `The two passwords are inconsistent`;
       } else if (Object.keys(errors).length > 0) {
         result = errors[Object.keys(errors)[0]];
       }
@@ -234,9 +241,14 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   }
 
   public checkSelf() {
-    if (this.inputControl.enabled && (this.inputControl.touched || this.inputIsRequired)) {
+    if (this.inputControl.enabled) {
+      (this.inputHtml.nativeElement as HTMLElement).focus();
       this.inputControl.markAsTouched({onlySelf: true});
       this.inputControl.updateValueAndValidity();
     }
+  }
+
+  public get isValid(): boolean {
+    return this.inputControl.valid && this.inputStatus === InputExStatus.iesView;
   }
 }

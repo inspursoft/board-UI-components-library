@@ -1,0 +1,20 @@
+div.container {
+  flex-direction: column;
+}
+
+div.content-container {
+  border-radius: 5px;
+  display: inline-block;
+  line-height: 30px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+div.content-container span.label-light-blue {
+  margin: 0;
+}
+
+div.content-container a.disabled {
+  cursor: not-allowed;
+  color: lightgray;
+}

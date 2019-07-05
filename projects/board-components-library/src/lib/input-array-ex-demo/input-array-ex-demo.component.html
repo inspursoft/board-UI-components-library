@@ -1,0 +1,13 @@
+<lib-input-array-ex [inputPlaceholder]="'input names'"
+                    [inputLabel]="'lib-input-array-ex'"
+                    [inputDisabled]="disabled"
+                    [inputIsRequired]="true"
+                    (commitEvent)="setArrayValue($event)">
+</lib-input-array-ex>
+values:{{values}}
+<button class="btn btn-primary" (click)="toggleDisabled()">
+  切换状态
+</button>
+<button class="btn btn-primary" (click)="checkValue()">
+  触发检查
+</button>

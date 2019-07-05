@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, Component,
+  Component,
   ContentChildren,
   EventEmitter,
   Input, OnChanges,
@@ -204,9 +204,11 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
   }
 
   public checkSelf() {
-    if (this.dropdownIsRequired && this.notSelect) {
-      this.checkSelfAnimation = 'begin';
-      setTimeout(() => this.checkSelfAnimation = 'end', 2000);
-    }
+    this.checkSelfAnimation = 'begin';
+    setTimeout(() => this.checkSelfAnimation = 'end', 2000);
+  }
+
+  public get isValid(): boolean {
+    return this.dropdownIsRequired && !this.dropdownDisabled ? !this.notSelect : true;
   }
 }

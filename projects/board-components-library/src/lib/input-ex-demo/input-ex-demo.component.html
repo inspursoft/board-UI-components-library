@@ -1,13 +1,13 @@
 <div style="margin-left: 20px;width: 500px;">
   <lib-input-ex [inputLabel]="'testInputLabel'"
-                [inputBindField]="title"
+                [inputDefaultValue]="title"
                 [inputIsRequired]="true"
                 [inputDisabled]="disabled"
                 [inputMaxlength]="3"
                 (commitEvent)="title = $event">
   </lib-input-ex>
   <lib-input-ex [inputLabel]="'testInputNumber'"
-                [inputBindField]="age"
+                [inputDefaultValue]="age"
                 [inputCategory]="2"
                 [inputIsRequired]="true"
                 [inputDisabled]="disabled"
@@ -16,7 +16,7 @@
   </lib-input-ex>
 
   <lib-input-ex [inputLabel]="'testInputPassword'"
-                [inputBindField]="password"
+                [inputDefaultValue]="password"
                 [inputCategory]="3"
                 [inputIsRequired]="true"
                 [inputDisabled]="disabled"
@@ -26,7 +26,7 @@
   </lib-input-ex>
 
   <lib-input-ex [inputLabel]="'testInputPassword'"
-                [inputBindField]="password"
+                [inputDefaultValue]="password"
                 [inputCategory]="3"
                 [inputIsRequired]="true"
                 [inputDisabled]="disabled"
@@ -36,7 +36,7 @@
   </lib-input-ex>
 
   <lib-input-ex [inputLabel]="'testInputEmail'"
-                [inputBindField]="email"
+                [inputDefaultValue]="email"
                 [inputCategory]="4"
                 [inputIsRequired]="true"
                 [inputPlaceholder]="'email'"
@@ -45,7 +45,7 @@
   </lib-input-ex>
 
   <lib-input-ex [inputLabel]="'testInputValidator'"
-                [inputBindField]="validator"
+                [inputDefaultValue]="validator"
                 [inputIsRequired]="true"
                 [inputPlaceholder]="'validator'"
                 [inputDisabled]="disabled"
@@ -55,7 +55,7 @@
   </lib-input-ex>
 
   <lib-input-ex [inputLabel]="'testInputAsyncValidator'"
-                [inputBindField]="asyncValidator"
+                [inputDefaultValue]="asyncValidator"
                 [inputIsRequired]="true"
                 [inputPlaceholder]="'asyncValidator'"
                 [inputDisabled]="disabled"

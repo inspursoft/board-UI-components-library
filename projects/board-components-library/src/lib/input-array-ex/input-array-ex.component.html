@@ -1,0 +1,20 @@
+<div class="clr-row container" [@check]="checkSelfAnimation">
+  <lib-input-ex [inputCategory]="category"
+                [inputLabel]="inputLabel"
+                [inputLabelMinWidth]="inputLabelMinWidth"
+                [inputPlaceholder]="inputPlaceholder"
+                [inputBindObjectField]="currentObjectValue"
+                [validatorFns]="[validatorExistsFn()]"
+                [inputDisabled]="inputDisabled"
+                (commitEvent)="commitValue($event)">
+  </lib-input-ex>
+  <div [style.margin-left.px]='inputLabelMinWidth'>
+    <div class="content-container" *ngFor="let value of source;let i = index">
+      <span class="label label-light-blue">{{value}}</span>
+      <a [class.disabled]="inputDisabled" href="javascript: void(0)" (click)="deleteItem(i)">
+        <clr-icon shape="times-circle" class="is-solid"></clr-icon>
+      </a>
+    </div>
+  </div>
+</div>
+

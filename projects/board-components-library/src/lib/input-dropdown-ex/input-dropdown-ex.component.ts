@@ -119,9 +119,11 @@ export class InputDropdownExComponent implements OnInit, OnChanges, CheckSelfVal
   }
 
   public checkSelf() {
-    if (this.isEnabled && this.dropdownIsRequired && this.notSelect) {
-      this.checkSelfAnimation = 'begin';
-      setTimeout(() => this.checkSelfAnimation = 'end', 2000);
-    }
+    this.checkSelfAnimation = 'begin';
+    setTimeout(() => this.checkSelfAnimation = 'end', 2000);
+  }
+
+  public get isValid(): boolean {
+    return this.isEnabled && this.dropdownIsRequired ? !this.notSelect : true;
   }
 }
