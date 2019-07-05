@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -9,7 +9,8 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { CheckSelfValid, InputExCategory, InputExStatus, InputExType } from '../shared.types';
+import { CheckSelfValid, CUR_LANG, InputExCategory, InputExStatus, InputExType } from '../shared.types';
+import { BoardComponentsLibraryService } from '../board-components-library.service';
 
 export class CustomInputExValidators {
   static passwordValidate(c: AbstractControl): ValidationErrors | null {
@@ -65,7 +66,8 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   inputValidatorFns: Array<ValidatorFn>;
   inputValidatorPending = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private service: BoardComponentsLibraryService,
+              private fb: FormBuilder) {
     this.editEvent = new EventEmitter();
     this.revertEvent = new EventEmitter();
     this.commitEvent = new EventEmitter();
@@ -173,26 +175,26 @@ export class InputExComponent implements OnInit, CheckSelfValid {
     });
     if (result === '') {
       if (Reflect.has(errors, 'required')) {
-        result = 'Input required.';
+        result = this.service.isEnglishLang ? 'Input required.' : '字段为必填。';
       } else if (Reflect.has(errors, 'pattern') && this.inputCategory === InputExCategory.iecNumber) {
-        result = 'Only input number.';
+        result = this.service.isEnglishLang ? 'Only input number.' : '只能输入数字。';
       } else if (Reflect.has(errors, 'pattern') && this.inputCategory === InputExCategory.iecString) {
-        result = 'The input does not conform to the rules.';
+        result = this.service.isEnglishLang ? 'The input does not conform to the rules.' : '输入不符合规则。';
         this.inputValidatorParam = `:${this.inputPattern}`;
       } else if (Reflect.has(errors, 'maxlength')) {
-        result = `Max length`;
+        result = this.service.isEnglishLang ? `Max length` : '最大长度';
         this.inputValidatorParam = `:${this.inputMaxlength}`;
       } else if (Reflect.has(errors, 'minlength')) {
-        result = `Min length`;
+        result = this.service.isEnglishLang ? `Min length` : '最小长度';
         this.inputValidatorParam = `:${this.inputMinlength}`;
       } else if (Reflect.has(errors, 'max')) {
-        result = `Max`;
+        result = this.service.isEnglishLang ? `Max` : '最大值';
         this.inputValidatorParam = `:${this.inputMax}`;
       } else if (Reflect.has(errors, 'min')) {
-        result = `Min`;
+        result = this.service.isEnglishLang ? `Min` : '最小值';
         this.inputValidatorParam = `:${this.inputMin}`;
       } else if (Reflect.has(errors, 'verifyPassword')) {
-        result = `The two passwords are inconsistent`;
+        result = this.service.isEnglishLang ? `The two passwords are inconsistent` : '两次密码输入不一致';
       } else if (Object.keys(errors).length > 0) {
         result = errors[Object.keys(errors)[0]];
       }

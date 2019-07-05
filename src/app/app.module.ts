@@ -13,7 +13,7 @@ import { BoardComponentsLibraryModule } from '../../projects/board-components-li
     BrowserModule,
     BrowserAnimationsModule,
     ClarityModule,
-    BoardComponentsLibraryModule
+    BoardComponentsLibraryModule.forRoot('endd')
   ],
   providers: [],
   bootstrap: [AppComponent]

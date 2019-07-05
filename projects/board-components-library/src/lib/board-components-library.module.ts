@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { InputDropdownExDemoComponent } from './input-dropdown-ex-demo/input-dro
 import { InputDropdownExSelectorDirective } from './input-dropdown-ex/input-dropdown-ex-selector.directive';
 import { InputArrayExComponent } from './input-array-ex/input-array-ex.component';
 import { InputArrayExDemoComponent } from './input-array-ex-demo/input-array-ex-demo.component';
+import { CUR_LANG } from './shared.types';
 
 @NgModule({
   imports: [
@@ -46,4 +47,10 @@ import { InputArrayExDemoComponent } from './input-array-ex-demo/input-array-ex-
   ]
 })
 export class BoardComponentsLibraryModule {
+  static forRoot(curLang: string): ModuleWithProviders {
+    return {
+      ngModule: BoardComponentsLibraryModule,
+      providers: [{provide: CUR_LANG, useValue: curLang}]
+    };
+  }
 }
