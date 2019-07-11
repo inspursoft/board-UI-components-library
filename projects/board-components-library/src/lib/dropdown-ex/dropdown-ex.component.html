@@ -6,13 +6,13 @@
   </label>
   <div *ngIf="isPreparing"
        [ngStyle]="{'min-width':dropdownMinWidth + 'px'}"
-       class="clr-row clr-flex-nowrap base-show preparing">
+       class="base-show preparing">
     <span>Preparing items...</span>
     <span class="spinner spinner-sm"></span>
   </div>
   <div *ngIf="dropdownDisabled"
        [ngStyle]="{'min-width':dropdownMinWidth + 'px'}"
-       class="clr-row clr-flex-nowrap base-show disabled">
+       class="base-show disabled">
     <span>{{activeText}}</span>
     <clr-icon shape="lock"></clr-icon>
   </div>
@@ -20,7 +20,7 @@
     <div [class.active]="active"
          [@check]="checkSelfAnimation"
          [ngStyle]="{'min-width':dropdownMinWidth + 'px'}"
-         class="clr-row clr-flex-nowrap clr-align-items-center base-show"
+         class="clr-align-items-center base-show"
          clrDropdownToggle>
       <span>{{activeText}}</span>
       <div class="dropdown-icon" [class.open-menu]="active" [class.close-menu]="!active">

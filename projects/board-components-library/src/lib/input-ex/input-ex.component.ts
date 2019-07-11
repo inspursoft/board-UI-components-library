@@ -9,7 +9,7 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { CheckSelfValid, CUR_LANG, InputExCategory, InputExStatus, InputExType } from '../shared.types';
+import { CheckSelfValid, InputExCategory, InputExStatus, InputExType } from '../shared.types';
 import { BoardComponentsLibraryService } from '../board-components-library.service';
 
 export class CustomInputExValidators {

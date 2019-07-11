@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 /*en: english, zh: chinese*/
-export const CUR_LANG = new InjectionToken('curLang');
+export const COMPONENTS_CUR_LANG = new InjectionToken('curLang');
 
 export interface CheckSelfValid {
   isValid: boolean;

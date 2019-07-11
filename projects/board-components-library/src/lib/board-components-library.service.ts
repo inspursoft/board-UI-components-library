@@ -1,5 +1,5 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { CUR_LANG } from './shared.types';
+import { COMPONENTS_CUR_LANG } from './shared.types';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { CUR_LANG } from './shared.types';
 export class BoardComponentsLibraryService {
 
   constructor(@Optional()
-              @Inject(CUR_LANG)
+              @Inject(COMPONENTS_CUR_LANG)
               private curLang: string) {
   }
 
