@@ -1,13 +1,14 @@
 import {
   Component,
-  ContentChildren,
+  ContentChild,
   EventEmitter,
-  Input, OnChanges,
+  Input,
+  OnChanges,
   OnInit,
   Output,
-  QueryList, SimpleChanges, ViewChild
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
-import { DropdownExSelectorDirective } from './dropdown-ex-selector.directive';
 import {
   CheckSelfValid,
   DROPDOWN_EX_DEFAULT_SHOW_COUNT,
@@ -19,6 +20,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { IfOpenService } from '@clr/angular/utils/conditional/if-open.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { EspecialTempDirective, ItemTempDirective, TitleTempDirective } from '../directives';
 
 @Component({
   selector: 'lib-dropdown-ex',
@@ -46,10 +48,14 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
   @Input() dropdownModel: DropdownExModel = 'single';
   @Input() dropdownLabel = '';
   @Input() dropdownLabelMinWidth = '180';
+  @Input() dropdownEspecialItem: any;
   @Input() dropdownActiveItem: any; /*Not empty*/
   @Input() dropdownActiveItems: Array<any>; /*Not empty*/
   @Output() dropdownChangeItem: EventEmitter<any>;
-  @ContentChildren(DropdownExSelectorDirective) contentTemp: QueryList<DropdownExSelectorDirective>;
+  @Output() dropdownClickEspecialItem: EventEmitter<any>;
+  @ContentChild(EspecialTempDirective) especialTemp: EspecialTempDirective;
+  @ContentChild(ItemTempDirective) itemTemp: ItemTempDirective;
+  @ContentChild(TitleTempDirective) titleTemp: TitleTempDirective;
   private filterSubject: Subject<string>;
   private filterText = '';
   private filterTimes = 1;
@@ -62,6 +68,7 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
     this.multipleSelectedItems = Array<any>();
     this.filterSubject = new Subject<string>();
     this.dropdownChangeItem = new EventEmitter();
+    this.dropdownClickEspecialItem = new EventEmitter();
   }
 
   ngOnInit() {
@@ -89,8 +96,24 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
     return this.isReadied && this.dropdownItems.length > DROPDOWN_EX_DEFAULT_SHOW_COUNT;
   }
 
+  get isEspecialTemplate(): boolean {
+    return this.especialTemp !== undefined;
+  }
+
+  get isNormalTile(): boolean {
+    return this.titleTemp === undefined;
+  }
+
+  get isSingleCustomTile(): boolean {
+    return this.titleTemp !== undefined && this.dropdownModel === 'single';
+  }
+
+  get isMultipleCustomTile(): boolean {
+    return this.titleTemp !== undefined && this.dropdownModel === 'multiple';
+  }
+
   get isCustomTemplate(): boolean {
-    return this.contentTemp && this.contentTemp.length > 0;
+    return this.itemTemp !== undefined;
   }
 
   get isSingleModel(): boolean {
@@ -111,6 +134,10 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
     return this.dropdownShowSearch &&
       this.filterText !== '' &&
       this.filteredDropdownItems.length === 0;
+  }
+
+  get isEmptyList(): boolean {
+    return this.dropdownItems !== undefined && this.dropdownItems.length === 0;
   }
 
   get isReadied(): boolean {
@@ -149,7 +176,7 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
     if (this.dropdownModel === 'single') {
       return !this.dropdownActiveItem;
     } else {
-      return this.dropdownActiveItems.length === 0;
+      return !this.dropdownActiveItems || this.dropdownActiveItems.length === 0;
     }
   }
 
@@ -175,7 +202,17 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
   }
 
   changeItemSelect(item: any) {
-    this.dropdownChangeItem.emit(item);
+    if (typeof item === 'object') {
+      const obj = {};
+      Object.assign(obj, item);
+      this.dropdownChangeItem.emit(obj);
+    } else {
+      this.dropdownChangeItem.emit(item);
+    }
+  }
+
+  clickEspecialItem(item: any) {
+    this.dropdownClickEspecialItem.emit(item);
   }
 
   setMultipleSelect(item: any) {

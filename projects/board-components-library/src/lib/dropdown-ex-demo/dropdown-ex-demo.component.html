@@ -46,8 +46,12 @@
                    [dropdownTip]="'Select name...'"
                    [dropdownActiveItem]="curSelectCustomItem"
                    (dropdownChangeItem)="setActiveCustomItem($event)">
-    <ng-template libDropdownExSelector let-name="name" let-age="age">
+    <ng-template libItemTemp let-name="name" let-age="age">
       Hello->{{name}}:{{age}}
+      <clr-icon shape="info-standard"></clr-icon>
+    </ng-template>
+    <ng-template libTitleTemp let-name="name" let-age="age">
+      Hello->{{name}}~~{{age}}
       <clr-icon shape="info-standard"></clr-icon>
     </ng-template>
   </lib-dropdown-ex>

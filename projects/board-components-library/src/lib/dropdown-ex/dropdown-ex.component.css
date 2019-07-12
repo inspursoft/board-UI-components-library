@@ -122,3 +122,13 @@ label.label-title {
 label.label-title span {
   color: red;
 }
+
+div.empty{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+div.empty clr-icon{
+  color: orange;
+}

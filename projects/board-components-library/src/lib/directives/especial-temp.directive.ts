@@ -1,11 +1,10 @@
 import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[libDropdownExSelector]'
+  selector: '[libEspecialTemp]'
 })
-export class DropdownExSelectorDirective {
+export class EspecialTempDirective {
   constructor(public templateRef: TemplateRef<any>,
               public viewContainer: ViewContainerRef) {
   }
-
 }
