@@ -41,55 +41,54 @@
         <clr-icon shape="caret up"></clr-icon>
       </div>
     </div>
-    <clr-dropdown-menu [ngStyle]="{'min-width':dropdownMinWidth + 'px'}" style="padding: 5px;">
+    <clr-dropdown-menu [ngStyle]="{'min-width':dropdownMinWidth + 'px'}">
       <label class="dropdown-header">{{dropdownMenuHeader}}</label>
       <div *ngIf="dropdownShowSearch" class="search-container">
         <label for="search"></label>
         <input id="search"
                type="text"
-               (click)="$event.stopPropagation()"
-               (keyup)="filterExecute($event)">
+               (input)="filterExecute($event)">
         <clr-icon shape="search"></clr-icon>
       </div>
-      <button *ngIf="isEspecialTemplate"
-              type="button"
-              clrDropdownItem
-              (click)="clickEspecialItem(dropdownEspecialItem)">
-        <ng-container [ngTemplateOutlet]="especialTemp.templateRef"
-                      [ngTemplateOutletContext]="dropdownEspecialItem">
-        </ng-container>
+      <div *ngIf="isEspecialTemplate" class="dropdown-item-especial">
+        <button type="button"
+                clrDropdownItem
+                [class.active]="itemActive(dropdownEspecialItem)"
+                (click)="changeItemSelect(dropdownEspecialItem)">
+          <ng-container [ngTemplateOutlet]="especialTemp.templateRef"
+                        [ngTemplateOutletContext]="dropdownEspecialItem">
+          </ng-container>
+        </button>
         <span class="dropdown-divider"></span>
-      </button>
-      <div *ngFor="let item of filteredDropdownItems;let i = index"
-           [class.multiple]="isMultipleModel"
-           class="clr-row clr-flex-nowrap clr-align-items-center item-container">
-        <button *ngIf="isCustomTemplate"
+      </div>
+      <div *ngFor="let item of dropdownItems;let i = index"
+           [style.display]="itemDisplayNone(item) ? 'none' : 'block'"
+           class="clr-row clr-flex-nowrap clr-align-items-center dropdown-item-container">
+        <button *ngIf="dropdownModel === 'single'"
                 type="button"
                 clrDropdownItem
-                [disabled]="itemDisabled(item)"
                 [class.active]="itemActive(item)"
+                [disabled]="itemDisabled(item)"
                 (click)="changeItemSelect(item)">
-          <ng-container [ngTemplateOutlet]="itemTemp.templateRef"
+          <span *ngIf="isDefaultTemplate">{{getItemDescription(item)}}</span>
+          <ng-container *ngIf="isCustomTemplate"
+                        [ngTemplateOutlet]="itemTemp.templateRef"
                         [ngTemplateOutletContext]="item">
           </ng-container>
         </button>
-        <button *ngIf="isSingleModel"
-                type="button"
-                clrDropdownItem
-                [class.active]="itemActive(item)"
-                [disabled]="itemDisabled(item)"
-                (click)="changeItemSelect(item)">
-          {{getItemDescription(item)}}
-        </button>
-        <div *ngIf="isMultipleModel"
+        <div *ngIf="dropdownModel === 'multiple'"
              class="multiple-container"
              [class.active]="itemActive(item)"
              (click)="setMultipleSelect(item)">
           <clr-icon shape="success-standard" [class.is-solid]="itemActive(item)"></clr-icon>
-          <label>{{getItemDescription(item)}}</label>
+          <span *ngIf="isDefaultTemplate">{{getItemDescription(item)}}</span>
+          <ng-container *ngIf="isCustomTemplate"
+                        [ngTemplateOutlet]="itemTemp.templateRef"
+                        [ngTemplateOutletContext]="item">
+          </ng-container>
         </div>
       </div>
-      <span *ngIf="hasNoDataForSearch || hasMoreItems || isEmptyList" class="dropdown-divider"></span>
+      <span *ngIf="hasNoDataForSearch || isEmptyList" class="dropdown-divider"></span>
       <div *ngIf="hasNoDataForSearch" class="empty">
         <span>No item for search</span>
         <clr-icon shape="error-standard"></clr-icon>
@@ -98,9 +97,6 @@
         <span>No item for select</span>
         <clr-icon shape="error-standard"></clr-icon>
       </div>
-      <a *ngIf="hasMoreItems" href="javascript:void(0)" (click)="incShowTimes($event)">
-        <span class="badge badge-2">{{dropdownItems.length - filteredDropdownItems.length}}</span>
-      </a>
     </clr-dropdown-menu>
   </clr-dropdown>
 </div>

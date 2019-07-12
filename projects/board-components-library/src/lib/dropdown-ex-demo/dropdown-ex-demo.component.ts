@@ -14,7 +14,8 @@ export class DropdownExDemoComponent {
   curSelectItems: Array<{ name: string, age: number }>;
   dropdownItem: Array<{ name: string, age: number }> = [
     {name: 'hello', age: 1},
-    {name: 'hello world', age: 2}
+    {name: 'hello world', age: 2},
+    {name: '你好啊。。', age: 3},
   ];
   dropdownItemStr = ['hello', 'world'];
   curSelectItemStr = '';

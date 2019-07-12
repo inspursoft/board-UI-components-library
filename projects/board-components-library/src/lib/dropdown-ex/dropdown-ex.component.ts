@@ -1,6 +1,7 @@
 import {
+  AfterViewInit,
   Component,
-  ContentChild,
+  ContentChild, ElementRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -34,7 +35,7 @@ import { EspecialTempDirective, ItemTempDirective, TitleTempDirective } from '..
     ])
   ]
 })
-export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
+export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, CheckSelfValid {
   @ViewChild('dropdownEx') dropdownEx: object;
   @Input() dropdownItems: Array<any>;
   @Input() dropdownItemDisabledFn: DropdownExDisabledFn;
@@ -52,44 +53,46 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
   @Input() dropdownActiveItem: any; /*Not empty*/
   @Input() dropdownActiveItems: Array<any>; /*Not empty*/
   @Output() dropdownChangeItem: EventEmitter<any>;
-  @Output() dropdownClickEspecialItem: EventEmitter<any>;
   @ContentChild(EspecialTempDirective) especialTemp: EspecialTempDirective;
   @ContentChild(ItemTempDirective) itemTemp: ItemTempDirective;
   @ContentChild(TitleTempDirective) titleTemp: TitleTempDirective;
   private filterSubject: Subject<string>;
   private filterText = '';
-  private filterTimes = 1;
   checkSelfAnimation: string;
   filteredDropdownItems: Array<any>;
   multipleSelectedItems: Array<any>;
+  itemElements: HTMLCollectionOf<HTMLElement>;
 
-  constructor() {
+  constructor(private el: ElementRef) {
     this.filteredDropdownItems = Array<any>();
     this.multipleSelectedItems = Array<any>();
     this.filterSubject = new Subject<string>();
     this.dropdownChangeItem = new EventEmitter();
-    this.dropdownClickEspecialItem = new EventEmitter();
   }
 
   ngOnInit() {
     this.filterSubject.asObservable().pipe(debounceTime(300)).subscribe((filterText: string) => {
       if (this.isReadied) {
-        this.filteredDropdownItems = this.dropdownItems.filter(item => {
-          const text = this.getItemDescription(item);
-          return filterText !== '' ? text.indexOf(filterText) > -1 : true;
-        });
-        this.filteredDropdownItems = this.filteredDropdownItems.filter((value, index) =>
-          index < this.filterTimes * DROPDOWN_EX_DEFAULT_SHOW_COUNT);
+        if (filterText === '') {
+          this.filteredDropdownItems = this.dropdownItems;
+        } else {
+          this.filteredDropdownItems = this.dropdownItems.filter((item, index) => {
+            const text = this.itemElements.item(index).innerText;
+            return filterText !== '' ? text.indexOf(filterText) > -1 : true;
+          });
+        }
       }
     });
-    this.filterSubject.next(this.filterText);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (Reflect.has(changes, 'dropdownItems')) {
-      this.filterTimes = 1;
-      this.filterSubject.next(this.filterText);
+      this.filteredDropdownItems = this.dropdownItems;
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.itemElements = this.el.nativeElement.getElementsByClassName('dropdown-item-container');
   }
 
   get dropdownShowSearch(): boolean {
@@ -116,18 +119,8 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
     return this.itemTemp !== undefined;
   }
 
-  get isSingleModel(): boolean {
-    return !this.isCustomTemplate && this.dropdownModel === 'single';
-  }
-
-  get isMultipleModel(): boolean {
-    return !this.isCustomTemplate && this.dropdownModel === 'multiple';
-  }
-
-  get hasMoreItems(): boolean {
-    return this.dropdownShowSearch &&
-      this.filterText === '' &&
-      this.filteredDropdownItems.length < this.dropdownItems.length;
+  get isDefaultTemplate(): boolean {
+    return this.itemTemp === undefined;
   }
 
   get hasNoDataForSearch(): boolean {
@@ -180,6 +173,10 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
     }
   }
 
+  itemDisplayNone(item: any): boolean {
+    return this.filteredDropdownItems.indexOf(item) < 0;
+  }
+
   filterExecute($event: KeyboardEvent) {
     this.filterText = ($event.target as HTMLInputElement).value;
     this.filterSubject.next(this.filterText);
@@ -211,10 +208,6 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
     }
   }
 
-  clickEspecialItem(item: any) {
-    this.dropdownClickEspecialItem.emit(item);
-  }
-
   setMultipleSelect(item: any) {
     if (this.multipleSelectedItems.find(value => value === item)) {
       const index = this.multipleSelectedItems.findIndex(value => value === item);
@@ -232,12 +225,6 @@ export class DropdownExComponent implements OnInit, OnChanges, CheckSelfValid {
         item.toString();
     }
     return item ? item.toString() : '';
-  }
-
-  incShowTimes(event: MouseEvent): void {
-    this.filterTimes += 1;
-    this.filterSubject.next(this.filterText);
-    event.stopImmediatePropagation();
   }
 
   public checkSelf() {

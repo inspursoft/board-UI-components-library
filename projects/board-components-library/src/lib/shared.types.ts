@@ -8,7 +8,7 @@ export interface CheckSelfValid {
   checkSelf();
 }
 
-export const DROPDOWN_EX_DEFAULT_SHOW_COUNT = 20;
+export const DROPDOWN_EX_DEFAULT_SHOW_COUNT = 15;
 export type DropdownExModel = 'single' | 'multiple';
 export type DropdownExDisabledFn = (item: any) => boolean;
 export type DropdownExSelectEnableFn = (item: any) => boolean;

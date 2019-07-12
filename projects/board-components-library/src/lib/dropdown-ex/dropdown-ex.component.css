@@ -61,7 +61,7 @@ clr-dropdown {
   margin-left: 10px;
 }
 
-div.item-container {
+div.dropdown-item-container {
   margin: 0 5px;
 }
 
@@ -123,12 +123,24 @@ label.label-title span {
   color: red;
 }
 
-div.empty{
+div.empty {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-div.empty clr-icon{
+div.empty clr-icon {
   color: orange;
+}
+
+clr-dropdown-menu {
+  padding: 5px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+div.dropdown-item-especial{
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
 }
