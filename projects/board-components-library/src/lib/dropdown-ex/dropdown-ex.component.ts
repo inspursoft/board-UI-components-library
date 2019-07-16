@@ -21,7 +21,9 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { IfOpenService } from '@clr/angular/utils/conditional/if-open.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { EspecialTempDirective, ItemTempDirective, TitleTempDirective } from '../directives';
+import { EspecialTempDirective } from '../directives/especial-temp.directive';
+import { ItemTempDirective } from '../directives/item-temp.directive';
+import { TitleTempDirective } from '../directives/title-temp.directive';
 
 @Component({
   selector: 'lib-dropdown-ex',
@@ -50,7 +52,6 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
   @Input() dropdownLabel = '';
   @Input() dropdownLabelMinWidth = '180';
   @Input() dropdownEspecialItem: any;
-  @Input() dropdownActiveItem: any; /*Not empty*/
   @Input() dropdownActiveItems: Array<any>; /*Not empty*/
   @Output() dropdownChangeItem: EventEmitter<any>;
   @ContentChild(EspecialTempDirective) especialTemp: EspecialTempDirective;
@@ -58,6 +59,7 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
   @ContentChild(TitleTempDirective) titleTemp: TitleTempDirective;
   private filterSubject: Subject<string>;
   private filterText = '';
+  dropdownActiveItem: any;
   checkSelfAnimation: string;
   filteredDropdownItems: Array<any>;
   multipleSelectedItems: Array<any>;
@@ -199,12 +201,23 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
   }
 
   changeItemSelect(item: any) {
-    if (typeof item === 'object') {
-      const obj = {};
-      Object.assign(obj, item);
-      this.dropdownChangeItem.emit(obj);
+    const changeFun = () => {
+      if (typeof item === 'object') {
+        const obj = {};
+        Object.assign(obj, item);
+        this.dropdownChangeItem.emit(obj);
+        this.dropdownActiveItem = obj;
+      } else {
+        this.dropdownChangeItem.emit(item);
+        this.dropdownActiveItem = item;
+      }
+    };
+    if (this.dropdownItemSelectEnableFn) {
+      if (this.dropdownItemSelectEnableFn(item)) {
+        changeFun();
+      }
     } else {
-      this.dropdownChangeItem.emit(item);
+      changeFun();
     }
   }
 

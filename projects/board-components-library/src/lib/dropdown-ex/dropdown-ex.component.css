@@ -1,3 +1,8 @@
+div.clr-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
 button[clrDropdownItem] {
   margin-top: 5px;
   padding: 0;
@@ -139,7 +144,7 @@ clr-dropdown-menu {
   overflow-y: auto;
 }
 
-div.dropdown-item-especial{
+div.dropdown-item-especial {
   display: flex;
   align-items: center;
   margin-left: 5px;

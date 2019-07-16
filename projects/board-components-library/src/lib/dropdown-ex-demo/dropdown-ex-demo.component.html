@@ -6,7 +6,6 @@
                    [dropdownDisabled]="disabled"
                    [dropdownItemDisabledFn]="dropdownDisabledFn()"
                    [dropdownTip]="'Select name...'"
-                   [dropdownActiveItem]="curSelectItem"
                    (dropdownChangeItem)="setActiveItem($event)">
   </lib-dropdown-ex>
   {{curSelectItem?.name}}
@@ -18,7 +17,6 @@
                    [dropdownDisabled]="disabled"
                    [dropdownItemDisabledFn]="dropdownDisabledFn()"
                    [dropdownTip]="'Select name...'"
-                   [dropdownActiveItem]="curSelectItemStr"
                    (dropdownChangeItem)="setActiveItemStr($event)">
   </lib-dropdown-ex>
   {{curSelectItemStr}}
@@ -44,7 +42,6 @@
                    [dropdownKey]="'name'"
                    [dropdownDisabled]="disabled"
                    [dropdownTip]="'Select name...'"
-                   [dropdownActiveItem]="curSelectCustomItem"
                    (dropdownChangeItem)="setActiveCustomItem($event)">
     <ng-template libItemTemp let-name="name" let-age="age">
       <div style="color: #3745ff;display: inline-block">Hello->{{name}}:{{age}}</div>

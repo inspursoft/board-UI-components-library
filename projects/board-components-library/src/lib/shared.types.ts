@@ -20,7 +20,7 @@ export enum InputExCategory {
 }
 
 export enum InputExType {
-  ietNormal = 1, ietClick, ietNoLabel
+  ietNormal = 1, ietClick
 }
 
 export enum InputExStatus {

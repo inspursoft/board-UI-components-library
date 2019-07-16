@@ -149,7 +149,7 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   }
 
   get showLabel(): boolean {
-    return this.inputType !== InputExType.ietNoLabel;
+    return this.inputLabel !== '';
   }
 
   get inputFieldTypeName(): string {
@@ -204,16 +204,14 @@ export class InputExComponent implements OnInit, CheckSelfValid {
 
   onInputBlur() {
     if (this.inputControl.valid &&
-      this.inputStatus === InputExStatus.iesEdit &&
-      this.inputType !== InputExType.ietNoLabel) {
+      this.inputStatus === InputExStatus.iesEdit) {
       this.inputStatus = InputExStatus.iesView;
     }
   }
 
   onInputFocus() {
     if (this.inputControl.enabled &&
-      this.inputStatus === InputExStatus.iesView &&
-      this.inputType !== InputExType.ietNoLabel) {
+      this.inputStatus === InputExStatus.iesView) {
       this.inputStatus = InputExStatus.iesEdit;
     }
   }
@@ -225,20 +223,24 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   }
 
   onCommitClick(event: Event) {
-    event.stopPropagation();
-    this.inputStatus = InputExStatus.iesView;
+    if (this.inputControl.valid) {
+      event.stopPropagation();
+      this.inputStatus = InputExStatus.iesView;
+    }
   }
 
   onEditClick() {
-    if (this.inputControl.enabled && this.inputType !== InputExType.ietNoLabel) {
-      this.inputHtml.nativeElement.focus();
-      if (document.activeElement === this.inputHtml.nativeElement) {
-        this.inputStatus = InputExStatus.iesEdit;
+    if (this.inputControl.enabled) {
+      if (this.inputType === InputExType.ietNormal) {
+        this.inputHtml.nativeElement.focus();
+        if (document.activeElement === this.inputHtml.nativeElement) {
+          this.inputStatus = InputExStatus.iesEdit;
+          this.editEvent.emit(this.inputControl.value);
+        }
+      } else {
+        this.inputHtml.nativeElement.blur();
         this.editEvent.emit(this.inputControl.value);
       }
-    } else if (this.inputControl.enabled && this.inputType === InputExType.ietNoLabel) {
-      this.inputHtml.nativeElement.blur();
-      this.editEvent.emit(this.inputControl.value);
     }
   }
 
