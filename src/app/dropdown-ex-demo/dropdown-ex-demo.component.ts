@@ -1,8 +1,8 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { DropdownExComponent } from '../dropdown-ex/dropdown-ex.component';
+import { DropdownExComponent } from 'board-components-library';
 
 @Component({
-  selector: 'lib-dropdown-ex-demo',
+  selector: 'app-dropdown-ex-demo',
   templateUrl: './dropdown-ex-demo.component.html',
   styleUrls: ['./dropdown-ex-demo.component.css']
 })

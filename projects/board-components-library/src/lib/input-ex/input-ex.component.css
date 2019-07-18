@@ -1,7 +1,6 @@
 div.input-ex-container {
   display: flex;
   align-items: center;
-  width: 100%;
   min-height: 30px;
 }
 

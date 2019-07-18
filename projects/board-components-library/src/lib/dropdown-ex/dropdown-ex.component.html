@@ -1,8 +1,8 @@
 <div class="clr-row clr-flex-nowrap clr-align-items-center">
   <label class="label-title"
          *ngIf="dropdownLabel.length > 0"
-         [style.minWidth.px]="dropdownLabelMinWidth">
-    {{dropdownLabel}}<span *ngIf="dropdownIsRequired">*</span>:
+         [style.width.px]="dropdownLabelWidth">
+    {{dropdownLabel}}:<span *ngIf="dropdownIsRequired">*</span>
   </label>
   <div *ngIf="isPreparing"
        [ngStyle]="{'min-width':dropdownMinWidth + 'px'}"
@@ -54,7 +54,7 @@
         <button type="button"
                 clrDropdownItem
                 [class.active]="itemActive(dropdownEspecialItem)"
-                (click)="changeItemSelect(dropdownEspecialItem)">
+                (click)="changeEspecialItemSelect()">
           <ng-container [ngTemplateOutlet]="especialTemp.templateRef"
                         [ngTemplateOutletContext]="dropdownEspecialItem">
           </ng-container>

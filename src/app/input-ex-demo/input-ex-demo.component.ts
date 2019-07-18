@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InputExComponent } from '../input-ex/input-ex.component';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { InputExComponent } from 'board-components-library';
 
 @Component({
-  selector: 'lib-input-ex-demo',
+  selector: 'app-input-ex-demo',
   templateUrl: './input-ex-demo.component.html',
   styleUrls: ['./input-ex-demo.component.css']
 })

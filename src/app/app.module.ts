@@ -3,11 +3,19 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from '@clr/angular';
 import { AppComponent } from './app.component';
-import { BoardComponentsLibraryModule } from '../../projects/board-components-library/src/lib/board-components-library.module';
+import { DropdownExDemoComponent } from './dropdown-ex-demo/dropdown-ex-demo.component';
+import { InputArrayExDemoComponent } from './input-array-ex-demo/input-array-ex-demo.component';
+import { InputDropdownExDemoComponent } from './input-dropdown-ex-demo/input-dropdown-ex-demo.component';
+import { InputExDemoComponent } from './input-ex-demo/input-ex-demo.component';
+import { BoardComponentsLibraryModule } from 'board-components-library';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DropdownExDemoComponent,
+    InputArrayExDemoComponent,
+    InputDropdownExDemoComponent,
+    InputExDemoComponent
   ],
   imports: [
     BrowserModule,

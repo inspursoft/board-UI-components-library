@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { CheckSelfValid, InputExCategory, InputExStatus, InputExType } from '../shared.types';
 import { BoardComponentsLibraryService } from '../board-components-library.service';
+import { Subscription } from 'rxjs';
 
 export class CustomInputExValidators {
   static passwordValidate(c: AbstractControl): ValidationErrors | null {
@@ -40,7 +41,8 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   private revertValue: number | string;
   @Input() inputIsRequired = false;
   @Input() inputCategory = InputExCategory.iecString;
-  @Input() inputLabelMinWidth = '180';
+  @Input() inputLabelWidth = 180;
+  @Input() inputWidth = '100%';
   @Input() inputLabel = '';
   @Input() inputType = InputExType.ietNormal;
   @Input() inputPattern: RegExp;
@@ -65,6 +67,8 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   inputControl: FormControl;
   inputValidatorFns: Array<ValidatorFn>;
   inputValidatorPending = false;
+  valueSubscription: Subscription;
+  statusSubscription: Subscription;
 
   constructor(private service: BoardComponentsLibraryService,
               private fb: FormBuilder) {
@@ -79,47 +83,7 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   }
 
   ngOnInit() {
-    this.inputControl.valueChanges.subscribe((value: any) => this.valueChanges.next(value));
-    this.inputControl.statusChanges.subscribe((value: any) => {
-      if (this.inputControl.valid) {
-        this.revertValue = this.inputControl.value;
-        const commitValue = this.inputCategory === InputExCategory.iecNumber ?
-          Number(this.inputControl.value) : this.inputControl.value;
-        this.commitEvent.emit(commitValue);
-      }
-      if (this.inputValidatorPending) {
-        this.onInputBlur();
-      }
-      this.inputValidatorPending = value === 'PENDING';
-    });
-    if (this.validatorFns) {
-      this.inputValidatorFns = this.inputValidatorFns.concat(this.validatorFns);
-    }
-    if (this.inputIsRequired && this.inputType !== InputExType.ietClick) {
-      this.inputValidatorFns.push(Validators.required);
-    }
-    if (this.inputMaxlength > 0) {
-      this.inputValidatorFns.push(Validators.maxLength(this.inputMaxlength));
-    }
-    if (this.inputMinlength > 0) {
-      this.inputValidatorFns.push(Validators.minLength(this.inputMinlength));
-    }
-    if (this.inputMax > 0) {
-      this.inputValidatorFns.push(Validators.max(this.inputMax));
-    }
-    if (this.inputMin > 0) {
-      this.inputValidatorFns.push(Validators.min(this.inputMin));
-    }
-    if (this.inputPattern) {
-      this.inputValidatorFns.push(Validators.pattern(this.inputPattern));
-    }
-    if (this.verifyPassword || this.sourcePassword) {
-      this.inputValidatorFns.push(CustomInputExValidators.passwordValidate);
-    }
-    this.inputControl.setValidators(this.inputValidatorFns);
-    if (this.validatorAsyncFn) {
-      this.inputControl.setAsyncValidators(this.validatorAsyncFn);
-    }
+    this.installValidators();
   }
 
   @Input()
@@ -141,10 +105,12 @@ export class InputExComponent implements OnInit, CheckSelfValid {
     this.inputControl.setValue(value);
   }
 
-  @Input() set inputBindObjectField(bind: object) {
-    if (bind && Reflect.has(bind, 'value')) {
-      this.revertValue = Reflect.get(bind, 'value');
-      this.inputControl.setValue(Reflect.get(bind, 'value'), {onlySelf: true});
+  @Input() set inputResetObject(reset: object) {
+    if (reset && Reflect.has(reset, 'value')) {
+      this.revertValue = Reflect.get(reset, 'value');
+      this.unInstallValidators();
+      this.inputControl.reset(this.revertValue, {onlySelf: true});
+      this.installValidators();
     }
   }
 
@@ -200,6 +166,57 @@ export class InputExComponent implements OnInit, CheckSelfValid {
       }
     }
     return result;
+  }
+
+  installValidators() {
+    this.valueSubscription = this.inputControl.valueChanges.subscribe((value: any) => this.valueChanges.next(value));
+    this.statusSubscription = this.inputControl.statusChanges.subscribe((value: any) => {
+      if (this.inputControl.valid) {
+        this.revertValue = this.inputControl.value;
+        const commitValue = this.inputCategory === InputExCategory.iecNumber ?
+          Number(this.inputControl.value) : this.inputControl.value;
+        this.commitEvent.emit(commitValue);
+      }
+      if (this.inputValidatorPending) {
+        this.onInputBlur();
+      }
+      this.inputValidatorPending = value === 'PENDING';
+    });
+    if (this.validatorFns) {
+      this.inputValidatorFns = this.inputValidatorFns.concat(this.validatorFns);
+    }
+    if (this.inputIsRequired && this.inputType !== InputExType.ietClick) {
+      this.inputValidatorFns.push(Validators.required);
+    }
+    if (this.inputMaxlength > 0) {
+      this.inputValidatorFns.push(Validators.maxLength(this.inputMaxlength));
+    }
+    if (this.inputMinlength > 0) {
+      this.inputValidatorFns.push(Validators.minLength(this.inputMinlength));
+    }
+    if (this.inputMax > 0) {
+      this.inputValidatorFns.push(Validators.max(this.inputMax));
+    }
+    if (this.inputMin > 0) {
+      this.inputValidatorFns.push(Validators.min(this.inputMin));
+    }
+    if (this.inputPattern) {
+      this.inputValidatorFns.push(Validators.pattern(this.inputPattern));
+    }
+    if (this.verifyPassword || this.sourcePassword) {
+      this.inputValidatorFns.push(CustomInputExValidators.passwordValidate);
+    }
+    this.inputControl.setValidators(this.inputValidatorFns);
+    if (this.validatorAsyncFn) {
+      this.inputControl.setAsyncValidators(this.validatorAsyncFn);
+    }
+  }
+
+  unInstallValidators() {
+    this.valueSubscription.unsubscribe();
+    this.statusSubscription.unsubscribe();
+    this.inputControl.clearValidators();
+    this.inputControl.clearAsyncValidators();
   }
 
   onInputBlur() {

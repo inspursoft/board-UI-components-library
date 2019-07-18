@@ -1,9 +1,9 @@
-<div class="input-ex-container" [formGroup]="inputFormGroup">
+<div class="input-ex-container" [style.width]="inputWidth" [formGroup]="inputFormGroup">
   <label *ngIf="showLabel"
          (mousedown)="onEditClick()"
          (click)="onEditClick()"
          class="input-ex-label"
-         [style.minWidth.px]="inputLabelMinWidth">
+         [style.minWidth.px]="inputLabelWidth">
     {{inputLabel}}:
   </label>
   <span *ngIf="inputIsRequired" class="asterisk">*</span>

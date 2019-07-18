@@ -50,16 +50,17 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
   @Input() dropdownMinWidth = 180;
   @Input() dropdownModel: DropdownExModel = 'single';
   @Input() dropdownLabel = '';
-  @Input() dropdownLabelMinWidth = '180';
+  @Input() dropdownLabelWidth = 180;
   @Input() dropdownEspecialItem: any;
   @Input() dropdownActiveItems: Array<any>; /*Not empty*/
+  @Input() dropdownActiveItem: any;
   @Output() dropdownChangeItem: EventEmitter<any>;
+  @Output() dropdownEspecialClick: EventEmitter<any>;
   @ContentChild(EspecialTempDirective) especialTemp: EspecialTempDirective;
   @ContentChild(ItemTempDirective) itemTemp: ItemTempDirective;
   @ContentChild(TitleTempDirective) titleTemp: TitleTempDirective;
   private filterSubject: Subject<string>;
   private filterText = '';
-  dropdownActiveItem: any;
   checkSelfAnimation: string;
   filteredDropdownItems: Array<any>;
   multipleSelectedItems: Array<any>;
@@ -70,6 +71,7 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
     this.multipleSelectedItems = Array<any>();
     this.filterSubject = new Subject<string>();
     this.dropdownChangeItem = new EventEmitter();
+    this.dropdownEspecialClick = new EventEmitter();
   }
 
   ngOnInit() {
@@ -90,6 +92,7 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
   ngOnChanges(changes: SimpleChanges): void {
     if (Reflect.has(changes, 'dropdownItems')) {
       this.filteredDropdownItems = this.dropdownItems;
+      this.dropdownActiveItem = undefined;
     }
   }
 
@@ -200,22 +203,28 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
     }
   }
 
+  changeEspecialItemSelect() {
+    this.dropdownEspecialClick.emit(this.dropdownEspecialItem);
+  }
+
   changeItemSelect(item: any) {
     const changeFun = () => {
       if (typeof item === 'object') {
         const obj = {};
         Object.assign(obj, item);
-        this.dropdownChangeItem.emit(obj);
         this.dropdownActiveItem = obj;
+        this.dropdownChangeItem.emit(obj);
       } else {
-        this.dropdownChangeItem.emit(item);
         this.dropdownActiveItem = item;
+        this.dropdownChangeItem.emit(item);
       }
     };
     if (this.dropdownItemSelectEnableFn) {
-      if (this.dropdownItemSelectEnableFn(item)) {
-        changeFun();
-      }
+      this.dropdownItemSelectEnableFn(item).subscribe((isCanSelect: boolean) => {
+        if (isCanSelect) {
+          changeFun();
+        }
+      });
     } else {
       changeFun();
     }

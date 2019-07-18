@@ -1,8 +1,11 @@
-div.container {
+div.input-array-container {
+  display: flex;
+  min-height: 30px;
   flex-direction: column;
+  border-radius: 5px;
 }
 
-div.content-container {
+div.input-array-content-container {
   border-radius: 5px;
   display: inline-block;
   line-height: 30px;
@@ -10,11 +13,11 @@ div.content-container {
   margin-top: 5px;
 }
 
-div.content-container span.label-light-blue {
+div.input-array-content-container span.label-light-blue {
   margin: 0;
 }
 
-div.content-container a.disabled {
+div.input-array-content-container a.disabled {
   cursor: not-allowed;
   color: lightgray;
 }

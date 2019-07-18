@@ -1,9 +1,8 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { InputDropdownExComponent } from '../input-dropdown-ex/input-dropdown-ex.component';
-import { Observable } from 'rxjs';
+import { InputDropdownExComponent } from 'board-components-library';
 
 @Component({
-  selector: 'lib-input-dropdown-ex-demo',
+  selector: 'app-input-dropdown-ex-demo',
   templateUrl: './input-dropdown-ex-demo.component.html',
   styleUrls: ['./input-dropdown-ex-demo.component.css']
 })

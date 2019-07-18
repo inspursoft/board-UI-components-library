@@ -1,5 +1,4 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { DropdownExComponent } from '../../projects/board-components-library/src/lib/dropdown-ex/dropdown-ex.component';
 
 @Component({
   selector: 'app-root',

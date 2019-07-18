@@ -2,9 +2,19 @@
                     [inputLabel]="'lib-input-array-ex'"
                     [inputDisabled]="disabled"
                     [inputIsRequired]="true"
+                    [inputArrayWidth]="'500px'"
                     (commitEvent)="setArrayValue($event)">
 </lib-input-array-ex>
 values:{{values}}
+<lib-input-array-ex [inputCategory]="'number'"
+                    [inputPlaceholder]="'input ages'"
+                    [inputLabel]="'lib-input-array-ex number'"
+                    [inputDisabled]="disabled"
+                    [inputIsRequired]="true"
+                    [inputArrayWidth]="'500px'"
+                    (commitEvent)="setNumberArrayValue($event)">
+</lib-input-array-ex>
+values:{{numberValues}}
 <button class="btn btn-primary" (click)="toggleDisabled()">
   切换状态
 </button>
