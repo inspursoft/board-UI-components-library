@@ -104,6 +104,7 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   @Input() set inputDefaultValue(value: string | number) {
     this.revertValue = value;
     this.inputControl.setValue(value);
+    this.inputStatus = InputExStatus.iesView;
   }
 
   @Input() set inputResetObject(reset: object) {
@@ -214,17 +215,14 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   }
 
   unInstallValidators() {
-    this.valueSubscription.unsubscribe();
-    this.statusSubscription.unsubscribe();
+    if (this.valueSubscription) {
+      this.valueSubscription.unsubscribe();
+    }
+    if (this.statusSubscription) {
+      this.statusSubscription.unsubscribe();
+    }
     this.inputControl.clearValidators();
     this.inputControl.clearAsyncValidators();
-  }
-
-  onInputBlur() {
-    if (this.inputControl.valid &&
-      this.inputStatus === InputExStatus.iesEdit) {
-      this.inputStatus = InputExStatus.iesView;
-    }
   }
 
   onInputFocus() {
@@ -259,6 +257,13 @@ export class InputExComponent implements OnInit, CheckSelfValid {
         this.inputHtml.nativeElement.blur();
         this.editEvent.emit(this.inputControl.value);
       }
+    }
+  }
+
+  public onInputBlur() {
+    if (this.inputControl.valid &&
+      this.inputStatus === InputExStatus.iesEdit) {
+      this.inputStatus = InputExStatus.iesView;
     }
   }
 

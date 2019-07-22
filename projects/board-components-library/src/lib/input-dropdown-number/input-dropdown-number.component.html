@@ -1,10 +1,8 @@
 <div class="clr-row clr-flex-nowrap clr-align-items-center">
-  <label class="label-title"
-         *ngIf="inputDropdownLabel.length > 0"
-         [style.width.px]="inputDropdownLabelWidth">
-    {{inputDropdownLabel}}:<span *ngIf="inputDropdownIsRequired">*</span>
+  <label class="label-title" *ngIf="label.length > 0" [style.width.px]="labelWidth">
+    {{label}}:<span *ngIf="isRequired">*</span>
   </label>
-  <div *ngIf="inputDropdownDisabled"
+  <div *ngIf="disabled"
        [ngStyle]="{'min-width':dropdownMinWidth + 'px'}" class="base-show disabled">
     <span>{{activeText}}</span>
     <clr-icon shape="lock"></clr-icon>
@@ -15,22 +13,22 @@
          [ngStyle]="{'min-width':dropdownMinWidth + 'px'}">
       <lib-input-ex clrDropdownTrigger
                     [inputCategory]="2"
-                    [inputDisabled]="inputDropdownDisabled"
-                    [inputPlaceholder]="inputPlaceholder"
+                    [inputDisabled]="disabled"
+                    [inputPlaceholder]="placeholder"
                     [validatorFns]="[validInputFunBind]"
                     [inputUpdateOn]="'change'"
-                    [inputMin]="inputMin"
-                    [inputMax]="inputMax"
+                    [inputMin]="min"
+                    [inputMax]="max"
                     [inputWidth]="inputWidth"
                     [validatorMessage]="validatorMessage"
-                    [inputDefaultValue]="dropdownActiveItem"
+                    [inputDefaultValue]="activeItem"
                     (commitEvent)="commitValue($event)"
                     (valueChanges)="valueChanges($event)">
       </lib-input-ex>
     </div>
     <clr-dropdown-menu [ngStyle]="{'min-width':dropdownMinWidth + 'px'}">
-      <label class="dropdown-header">{{dropdownMenuHeader}}</label>
-      <div *ngFor="let item of dropdownItems;let i = index"
+      <label class="dropdown-header">{{menuHeader}}</label>
+      <div *ngFor="let item of dropdownItems"
            class="clr-row clr-flex-nowrap clr-align-items-center dropdown-item-container">
         <button type="button"
                 clrDropdownItem

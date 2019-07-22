@@ -55,6 +55,7 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
   @Input() dropdownActiveItems: Array<any>; /*Not empty*/
   @Input() dropdownActiveItem: any;
   @Input() dropdownDefaultActiveIndex = -1;
+  @Input() dropdpwnPosition = 'bottom-left';
   @Output() dropdownChangeItem: EventEmitter<any>;
   @Output() dropdownEspecialClick: EventEmitter<any>;
   @ContentChild(EspecialTempDirective) especialTemp: EspecialTempDirective;

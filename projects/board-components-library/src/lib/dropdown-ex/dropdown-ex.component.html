@@ -41,7 +41,7 @@
         <clr-icon shape="caret up"></clr-icon>
       </div>
     </div>
-    <clr-dropdown-menu [ngStyle]="{'min-width':dropdownMinWidth + 'px'}">
+    <clr-dropdown-menu [ngStyle]="{'min-width':dropdownMinWidth + 'px'}" [clrPosition]="dropdpwnPosition">
       <label class="dropdown-header">{{dropdownMenuHeader}}</label>
       <div *ngIf="dropdownShowSearch" class="search-container">
         <label for="search"></label>

@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { InputDropdownNumberComponent } from '../../../projects/board-components-library/src/lib/input-dropdown-number/input-dropdown-number.component';
+import { InputDropdownNumberComponent } from 'board-components-library';
 
 @Component({
   selector: 'app-input-dropdown-ex-demo',

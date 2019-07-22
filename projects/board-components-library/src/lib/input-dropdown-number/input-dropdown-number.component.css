@@ -6,6 +6,15 @@ div.input-container{
   border-radius: 5px;
 }
 
+button[clrDropdownItem] {
+  margin-top: 5px;
+  padding: 0;
+}
+
+button[clrDropdownItem]:hover {
+  font-size: 16px;
+}
+
 div.base-show {
   border-bottom: 1px solid lightgray;
   min-height: 30px;
@@ -25,6 +34,17 @@ div.base-show.disabled {
 
 div.dropdown-item-container {
   margin: 0 5px;
+}
+
+label.label-title {
+  white-space: nowrap;
+  text-align: right;
+  text-wrap: none;
+  line-height: 30px;
+}
+
+label.label-title span {
+  color: red;
 }
 
 div.empty {
