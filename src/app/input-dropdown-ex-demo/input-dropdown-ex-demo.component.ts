@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { InputDropdownExComponent } from 'board-components-library';
+import { InputDropdownNumberComponent } from '../../../projects/board-components-library/src/lib/input-dropdown-number/input-dropdown-number.component';
 
 @Component({
   selector: 'app-input-dropdown-ex-demo',
@@ -7,23 +7,9 @@ import { InputDropdownExComponent } from 'board-components-library';
   styleUrls: ['./input-dropdown-ex-demo.component.css']
 })
 export class InputDropdownExDemoComponent implements OnInit {
-  @ViewChildren(InputDropdownExComponent) checkSelfList: QueryList<InputDropdownExComponent>;
+  @ViewChildren(InputDropdownNumberComponent) checkSelfList: QueryList<InputDropdownNumberComponent>;
   disabled = false;
-  curSelectItem: { name: string, age: number };
-  curAsyncSelectItem: { name: string, age: number };
-  curCustomAsyncSelectItem: { name: string, age: number };
-  dropdownItems: Array<{ name: string, age: number }> = [
-    {name: 'hello', age: 1},
-    {name: 'hello world', age: 2}
-  ];
-  dropdownAsyncItems: Array<{ name: string, age: number }> = [
-    {name: 'hello', age: 1},
-    {name: 'hello world', age: 2}
-  ];
-  dropdownCustomAsyncItems: Array<{ name: string, age: number }> = [
-    {name: 'hello custom', age: 1},
-    {name: 'hello world custom', age: 2}
-  ];
+  curAge: number;
 
   constructor() {
   }
@@ -35,27 +21,12 @@ export class InputDropdownExDemoComponent implements OnInit {
     return this.dropdownDisabled.bind(this);
   }
 
-  dropdownDisabled(item: { name: string, age: number }): boolean {
-    return item.name === 'hello';
+  dropdownDisabled(age: number): boolean {
+    return age === 123;
   }
 
-  setActiveItem(item: { name: string, age: number }) {
-    this.curSelectItem = item;
-  }
-
-  setAsyncActiveItem(item: { name: string, age: number }) {
-    this.curAsyncSelectItem = item;
-  }
-
-  setCustomAsyncActiveItem(item: { name: string, age: number }) {
-    this.curCustomAsyncSelectItem = item;
-  }
-
-  refreshItems(serchText: string) {
-    setTimeout(() => {
-      this.dropdownAsyncItems = this.dropdownItems.filter(
-        (value: { name: string, age: number }) => value.name.includes(serchText));
-    }, 300);
+  setActiveItem(age: number ) {
+    this.curAge = age;
   }
 
   toggleDisabled() {

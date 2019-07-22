@@ -2,8 +2,6 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { InputDropdownExComponent } from './input-dropdown-ex';
-import { InputDropdownExSelectorDirective } from './input-dropdown-ex';
 import { InputArrayExComponent } from './input-array-ex/input-array-ex.component';
 import { COMPONENTS_CUR_LANG } from './shared.types';
 import { InputExComponent } from './input-ex/input-ex.component';
@@ -11,6 +9,7 @@ import { DropdownExComponent } from './dropdown-ex/dropdown-ex.component';
 import { EspecialTempDirective } from './directives/especial-temp.directive';
 import { TitleTempDirective } from './directives/title-temp.directive';
 import { ItemTempDirective } from './directives/item-temp.directive';
+import { InputDropdownNumberComponent } from './input-dropdown-number/input-dropdown-number.component';
 
 @NgModule({
   imports: [
@@ -21,19 +20,17 @@ import { ItemTempDirective } from './directives/item-temp.directive';
   ],
   declarations: [InputExComponent,
     DropdownExComponent,
-    InputDropdownExComponent,
-    InputDropdownExSelectorDirective,
     InputArrayExComponent,
     EspecialTempDirective,
     TitleTempDirective,
-    ItemTempDirective
+    ItemTempDirective,
+    InputDropdownNumberComponent
   ],
   exports: [
     InputExComponent,
     DropdownExComponent,
-    InputDropdownExComponent,
-    InputDropdownExSelectorDirective,
     InputArrayExComponent,
+    InputDropdownNumberComponent,
     EspecialTempDirective,
     TitleTempDirective,
     ItemTempDirective

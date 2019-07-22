@@ -1,0 +1,38 @@
+clr-dropdown-menu{
+  margin-left: 10px;
+}
+
+div.input-container{
+  border-radius: 5px;
+}
+
+div.base-show {
+  border-bottom: 1px solid lightgray;
+  min-height: 30px;
+  display: flex;
+  padding: 5px !important;
+}
+
+div.base-show.active {
+  background-color: lightgray;
+}
+
+div.base-show.disabled {
+  margin-left: 10px;
+  background-color: lightgrey;
+  justify-content: space-between;
+}
+
+div.dropdown-item-container {
+  margin: 0 5px;
+}
+
+div.empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+div.empty clr-icon {
+  color: orange;
+}

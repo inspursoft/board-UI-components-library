@@ -1,0 +1,57 @@
+<div class="clr-row clr-flex-nowrap clr-align-items-center">
+  <label class="label-title"
+         *ngIf="inputDropdownLabel.length > 0"
+         [style.width.px]="inputDropdownLabelWidth">
+    {{inputDropdownLabel}}:<span *ngIf="inputDropdownIsRequired">*</span>
+  </label>
+  <div *ngIf="inputDropdownDisabled"
+       [ngStyle]="{'min-width':dropdownMinWidth + 'px'}" class="base-show disabled">
+    <span>{{activeText}}</span>
+    <clr-icon shape="lock"></clr-icon>
+  </div>
+  <clr-dropdown #dropdownEx *ngIf="isReadied" [clrCloseMenuOnItemClick]="true">
+    <div class="input-container"
+         [@check]="checkSelfAnimation"
+         [ngStyle]="{'min-width':dropdownMinWidth + 'px'}">
+      <lib-input-ex clrDropdownTrigger
+                    [inputCategory]="2"
+                    [inputDisabled]="inputDropdownDisabled"
+                    [inputPlaceholder]="inputPlaceholder"
+                    [validatorFns]="[validInputFunBind]"
+                    [inputUpdateOn]="'change'"
+                    [inputMin]="inputMin"
+                    [inputMax]="inputMax"
+                    [inputWidth]="inputWidth"
+                    [validatorMessage]="validatorMessage"
+                    [inputDefaultValue]="dropdownActiveItem"
+                    (commitEvent)="commitValue($event)"
+                    (valueChanges)="valueChanges($event)">
+      </lib-input-ex>
+    </div>
+    <clr-dropdown-menu [ngStyle]="{'min-width':dropdownMinWidth + 'px'}">
+      <label class="dropdown-header">{{dropdownMenuHeader}}</label>
+      <div *ngFor="let item of dropdownItems;let i = index"
+           class="clr-row clr-flex-nowrap clr-align-items-center dropdown-item-container">
+        <button type="button"
+                clrDropdownItem
+                [class.active]="itemActive(item)"
+                [disabled]="itemDisabled(item)"
+                (click)="changeItemSelect(item)">
+          <div *ngIf="isDefaultTemplate">
+            <span>{{validNumberStart(item)}}</span>
+            <span style="color: blue"><b>{{curValue}}</b></span>
+            <span>{{validNumberEnd(item)}}</span>
+          </div>
+          <ng-container *ngIf="isCustomTemplate"
+                        [ngTemplateOutlet]="itemTemp.templateRef"
+                        [ngTemplateOutletContext]="item">
+          </ng-container>
+        </button>
+      </div>
+      <div *ngIf="isEmptyList" class="empty">
+        <span>No item for select</span>
+        <clr-icon shape="error-standard"></clr-icon>
+      </div>
+    </clr-dropdown-menu>
+  </clr-dropdown>
+</div>

@@ -6,6 +6,7 @@
                    [dropdownDisabled]="disabled"
                    [dropdownItemDisabledFn]="dropdownDisabledFn()"
                    [dropdownTip]="'Select name...'"
+                   [dropdownDefaultActiveIndex]="0"
                    (dropdownChangeItem)="setActiveItem($event)">
   </lib-dropdown-ex>
   {{curSelectItem?.name}}

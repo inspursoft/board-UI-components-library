@@ -56,6 +56,7 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   @Input() validatorFns: Array<ValidatorFn>;
   @Input() validatorAsyncFn: AsyncValidatorFn;
   @Input() validatorMessage: Array<{ key: string, message: string }>;
+  @Input() inputUpdateOn: 'change' | 'blur' | 'submit' = 'blur';
   @Output() editEvent: EventEmitter<any>;
   @Output() revertEvent: EventEmitter<any>;
   @Output() commitEvent: EventEmitter<any>;
@@ -79,10 +80,10 @@ export class InputExComponent implements OnInit, CheckSelfValid {
     this.validatorMessage = new Array<{ key: string, message: string }>();
     this.inputValidatorFns = new Array<ValidatorFn>();
     this.inputControl = this.fb.control({value: '', disabled: this.isDisabled});
-    this.inputFormGroup = this.fb.group({inputControl: this.inputControl}, {updateOn: 'blur'});
   }
 
   ngOnInit() {
+    this.inputFormGroup = this.fb.group({inputControl: this.inputControl}, {updateOn: this.inputUpdateOn});
     this.installValidators();
   }
 

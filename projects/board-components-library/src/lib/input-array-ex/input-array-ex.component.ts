@@ -16,7 +16,7 @@ import { InputExComponent } from '../input-ex/input-ex.component';
     ])
   ]
 })
-export class InputArrayExComponent implements OnInit, AfterViewInit, CheckSelfValid {
+export class InputArrayExComponent implements OnInit, CheckSelfValid {
   @Input() inputCategory: InputArrayExCategory = 'string';
   @Input() inputDisabled = false;
   @Input() inputIsRequired = false;
@@ -46,19 +46,14 @@ export class InputArrayExComponent implements OnInit, AfterViewInit, CheckSelfVa
     if (this.inputArrayDefault) {
       this.source.unshift(...this.inputArrayDefault);
     }
-    if (this.inputArrayFixed) {
-      this.source.unshift(...this.inputArrayFixed);
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (this.source.length > 0) {
-      this.commitEvent.emit(this.source);
-    }
   }
 
   get category(): number {
     return this.inputCategory === 'string' ? 1 : 2;
+  }
+
+  get items(): Array<InputArrayExType> {
+    return this.inputArrayFixed ? this.inputArrayFixed.concat(this.source) : this.source;
   }
 
   isFixedItem(item: InputArrayExType): boolean {
@@ -70,7 +65,8 @@ export class InputArrayExComponent implements OnInit, AfterViewInit, CheckSelfVa
   }
 
   validatorExists(control: AbstractControl): ValidationErrors | null {
-    if (this.source.find(value => value.toString() === control.value)) {
+    if (this.source.find(value => value.toString() === control.value) ||
+      (this.inputArrayFixed && this.inputArrayFixed.find(value => value.toString() === control.value))) {
       return {exists: 'value exists'};
     } else {
       return null;
@@ -79,14 +75,17 @@ export class InputArrayExComponent implements OnInit, AfterViewInit, CheckSelfVa
 
   commitValue(value: any) {
     this.currentObjectValue = {value: ''};
-    this.source.push(value);
-    this.commitEvent.emit(this.source);
+    if (value !== '' && value !== 0) {
+      this.source.push(value);
+      this.commitEvent.emit(Array.from(this.source));
+    }
   }
 
-  deleteItem(index: number) {
-    if (!this.inputDisabled) {
+  deleteItem(item: any) {
+    if (!this.inputDisabled && !this.isFixedItem(item)) {
+      const index = this.source.findIndex(value1 => value1 === item);
       this.source.splice(index, 1);
-      this.commitEvent.emit(this.source);
+      this.commitEvent.emit(Array.from(this.source));
     }
   }
 

@@ -54,6 +54,7 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
   @Input() dropdownEspecialItem: any;
   @Input() dropdownActiveItems: Array<any>; /*Not empty*/
   @Input() dropdownActiveItem: any;
+  @Input() dropdownDefaultActiveIndex = -1;
   @Output() dropdownChangeItem: EventEmitter<any>;
   @Output() dropdownEspecialClick: EventEmitter<any>;
   @ContentChild(EspecialTempDirective) especialTemp: EspecialTempDirective;
@@ -87,6 +88,10 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
         }
       }
     });
+    if (this.dropdownDefaultActiveIndex > -1 && this.dropdownItems.length > 0) {
+      const item = this.dropdownItems[this.dropdownDefaultActiveIndex];
+      this.changeItemExecute(item);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -207,26 +212,27 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
     this.dropdownEspecialClick.emit(this.dropdownEspecialItem);
   }
 
+  changeItemExecute(item: any) {
+    if (typeof item === 'object') {
+      const obj = {};
+      Object.assign(obj, item);
+      this.dropdownActiveItem = obj;
+      this.dropdownChangeItem.emit(obj);
+    } else {
+      this.dropdownActiveItem = item;
+      this.dropdownChangeItem.emit(item);
+    }
+  }
+
   changeItemSelect(item: any) {
-    const changeFun = () => {
-      if (typeof item === 'object') {
-        const obj = {};
-        Object.assign(obj, item);
-        this.dropdownActiveItem = obj;
-        this.dropdownChangeItem.emit(obj);
-      } else {
-        this.dropdownActiveItem = item;
-        this.dropdownChangeItem.emit(item);
-      }
-    };
     if (this.dropdownItemSelectEnableFn) {
       this.dropdownItemSelectEnableFn(item).subscribe((isCanSelect: boolean) => {
         if (isCanSelect) {
-          changeFun();
+          this.changeItemExecute(item);
         }
       });
     } else {
-      changeFun();
+      this.changeItemExecute(item);
     }
   }
 

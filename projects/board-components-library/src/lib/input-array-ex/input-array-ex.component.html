@@ -15,11 +15,11 @@
                 (commitEvent)="commitValue($event)">
   </lib-input-ex>
   <div [style.margin-left.px]='inputLabelWidth'>
-    <div class="input-array-content-container" *ngFor="let value of source;let i = index">
+    <div class="input-array-content-container" *ngFor="let value of items;let i = index">
       <span class="label label-light-blue">{{value}}</span>
       <a [class.disabled]="inputDisabled || isFixedItem(value)"
          href="javascript: void(0)"
-         (click)="deleteItem(i)">
+         (click)="deleteItem(value)">
         <clr-icon shape="times-circle" class="is-solid"></clr-icon>
       </a>
     </div>
