@@ -14,6 +14,10 @@
 ### 环境要求
 1.X.X ---> angular7.2.0,clarity1.1.3,rxjs6.3.3
 
+### 使用方法
+工程中目前主要包括两部分：Board-components-library组件的源码和使用的Demo；在克隆后，可以执行npm install来获取对应的npm packages，
+然后执行npm start，访问`http://localhost:4200/`即可看到Demo。
+
 ### 代码示例
  ```
  <lib-dropdown-ex [dropdownLabel]="'Custom item demo'"
@@ -34,27 +38,16 @@
      </ng-template>
    </lib-dropdown-ex>
  ```
+----------------------------------------------
 
-## Development server
+>### lib-input-ex
+> *描述
+>  >建立在[Clarity Input](https://clarity.design/documentation/input)的基础之上，利用Angular的响应式
+表单的概念[ReactiveForms](https://angular.cn/guide/reactive-forms)，添加了设定异步验证、设定同步验证、
+设定提示信息、默认值回写、合法性检查等功能。
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+> *源码
+>  >[lib-input-ex](https://github.com/liyanq528/board-components-library/tree/master/projects/board-components-library/src/lib/input-array-ex)
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+> *Demo
+>  >[Demo](https://github.com/liyanq528/board-components-library/tree/master/src/app/input-ex-demo)
