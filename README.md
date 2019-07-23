@@ -4,7 +4,7 @@
 
 ### 来源
    我们用Angular框架开发前端项目的时候，需要用到各种个样的组件库，如Material(https://material.angular.io/)，
-Clarity(https://clarity.design/)等，这样可以简化开发流程；但这些组件库并不是结合实际的需求而产生的。
+Clarity(https://clarity.design/)等， 这样可以简化开发流程；但这些组件库并不是结合实际的需求而产生的。
 比如Clarity的下拉组件Dropdown(https://clarity.design/documentation/dropdowns)，
 提供了菜单嵌套、菜单位置、触发菜单、禁用菜单、菜单分割线等功能，但它没提供如菜单模版化、准备菜单的过渡状态、设置菜单及
 组件的宽度、多项选择且自定义显示选择项、搜索菜单、验证合法性等等功能，而这些需求正是我们开发中能遇到的，所以现结合Clarity的
@@ -14,8 +14,24 @@ Clarity(https://clarity.design/)等，这样可以简化开发流程；但这些
 ### 环境要求
 1.X.X ---> angular7.2.0,clarity1.1.3,rxjs6.3.3
 
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.2.
+### 代码示例
+ ` <lib-dropdown-ex [dropdownLabel]="'Custom item demo'"
+                   [dropdownItems]="dropdownItem"
+                   [dropdownMenuHeader]="'Select name'"
+                   [dropdownIsRequired]="true"
+                   [dropdownKey]="'name'"
+                   [dropdownDisabled]="disabled"
+                   [dropdownTip]="'Select name...'"
+                   (dropdownChangeItem)="setActiveCustomItem($event)">
+    <ng-template libItemTemp let-name="name" let-age="age">
+      <div style="color: #3745ff;display: inline-block">Hello->{{name}}:{{age}}</div>
+      <clr-icon shape="info-standard"></clr-icon>
+    </ng-template>
+    <ng-template libTitleTemp let-name="name" let-age="age">
+      <div>Hello->{{name}}~~{{age}}</div>
+      <clr-icon shape="info-standard"></clr-icon>
+    </ng-template>
+  </lib-dropdown-ex>`
 
 ## Development server
 
