@@ -40,14 +40,9 @@
  ```
 ----------------------------------------------
 
->### lib-input-ex
-> *描述
->  >建立在[Clarity Input](https://clarity.design/documentation/input)的基础之上，利用Angular的响应式
+### lib-input-ex
+
+建立在[Clarity Input](https://clarity.design/documentation/input)的基础之上，利用Angular的响应式
 表单的概念[ReactiveForms](https://angular.cn/guide/reactive-forms)，添加了设定异步验证、设定同步验证、
-设定提示信息、默认值回写、合法性检查等功能。
-
-> *源码
->  >[lib-input-ex](https://github.com/liyanq528/board-components-library/tree/master/projects/board-components-library/src/lib/input-array-ex)
-
-> *Demo
->  >[Demo](https://github.com/liyanq528/board-components-library/tree/master/src/app/input-ex-demo)
+设定提示信息、默认值回写、合法性检查等功能。[源码](https://github.com/liyanq528/board-components-library/tree/master/projects/board-components-library/src/lib/input-array-ex);
+[Demo](https://github.com/liyanq528/board-components-library/tree/master/src/app/input-ex-demo)
