@@ -48,9 +48,9 @@ export class DropdownExComponent implements OnInit, OnChanges, AfterViewInit, Ch
   @Input() dropdownIsRequired = false;
   @Input() dropdownMenuHeader = '';
   @Input() dropdownMinWidth = 180;
-  @Input() dropdownModel: DropdownExModel = 'single';
   @Input() dropdownLabel = '';
   @Input() dropdownLabelWidth = 180;
+  @Input() dropdownModel: DropdownExModel = 'single';
   @Input() dropdownEspecialItem: any;
   @Input() dropdownActiveItems: Array<any>; /*Not empty*/
   @Input() dropdownActiveItem: any;

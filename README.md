@@ -17,6 +17,11 @@
 ### 使用方法
 工程中目前主要包括两部分：Board-components-library组件的源码和使用的Demo；在克隆后，可以执行npm install来获取对应的npm packages，
 然后执行npm start，访问`http://localhost:4200/`即可看到Demo。
+1. 在Angular工程下安装board-components-library
+`npm install board-components-library`
+2. 在app.module中，imports导入，en代表了使用英语提示，不写forRoot表示用中文提示。
+`BoardComponentsLibraryModule.forRoot('en')`
+3. 可以在HTML模版中使用Board-components-library提供的标签，如下代码所示。
 
 ### 代码示例
  ```
@@ -40,7 +45,7 @@
  ```
 ----------------------------------------------
 
-### lib-input-ex
+### InputExComponent
 
 ##### 说明
 建立在[Clarity Input](https://clarity.design/documentation/input)的基础之上，利用Angular的响应式
@@ -69,3 +74,54 @@ editEvent | 输入框进入编辑状态触发 | 输出 | EventEmitter<any>实例
 revertEvent | 返回上一个正确值触发 | 输出 | EventEmitter<any>实例
 commitEvent | 提交一个合法值触发 | 输出 | EventEmitter<any>实例
 valueChanges | 在输入值改变时触发 | 输出 | EventEmitter<any>实例
+
+### DropdownExComponent
+
+##### 说明
+建立在[Clarity dropdowns](https://clarity.design/documentation/dropdowns)的基础之上，利用Angular模版容器
+ng-container的优势，扩展了许多能自定义的视图，如菜单模版化、准备菜单的过渡状态、设置菜单及组件的宽度、多项选择且自定义显
+示选择项、搜索菜单、验证合法性等等功能；[源码](https://github.com/liyanq528/board-components-library/tree/master/projects/board-components-library/src/lib/dropdown-ex);
+[Demo](https://github.com/liyanq528/board-components-library/tree/master/src/app/dropdown-ex-demo)
+
+##### api
+
+名称 | 说明 | 输入(输出) | 默认值
+------- | ----------- | --------- | ---------
+dropdownItems | 下拉的菜单数组 | 输入 | undefined
+dropdownItemDisabledFn | 是否禁用的同步回调函数 | 输入 | undefined
+dropdownItemSelectEnableFn | 是否能选择的异步回调函数 | 输入 | undefined
+dropdownDisabled | 下拉框是否禁用 | 输入 | undefined
+dropdownTip | 未选择时的提示信息,如:'请选择...' | 输入 | ''
+dropdownKey | 如果列表数组元素是对象类型(常见),设置显示出来的字段名字 | 输入 | ''
+dropdownIsRequired | 是否必须选择 | 输入 | false
+... | ... | ... | ...
+dropdownModel | 单项选择或者多项选择: 'single'、'multiple' | 输入 | 'single'
+dropdownEspecialItem | 在所有列表的上面增加了一个特殊的选项，例如选择项目时，给出项目列表后，利用这个特殊选项可以处理添加项目的需求 | 输入 | undefined
+dropdownActiveItems | 设置多项选择时，没选择时的默认值或者同步选择数据 | 输入 | undefined
+dropdownActiveItem | 设置但项选择时，没选择时的默认值或者同步选择数据 | 输入 | undefined
+dropdownDefaultActiveIndex | 设定一个默认选择的Index | 输入 | undefined
+dropdpwnPosition | 下拉菜单的位置 | 输入 | 'bottom-left'
+dropdownChangeItem | 选择下拉菜单时触发 | 输出 | EventEmitter<any>实例
+dropdownEspecialClick | 点击特殊菜单时触发 | 输出 | EventEmitter<any>实例
+especialTemp | 特殊选项的模版选择指令 | 输入 | undefined
+itemTemp | 菜单的模版选择指令 | 输入 | undefined
+titleTemp | 显示框的模版选择指令 | 输入 | undefined
+
+### InputArrayExComponent
+
+##### 说明
+解决了多个输入的需求问题，例如需要设定容器端口时，可以不输入、输入1个或者多个。目前组件做的比较简单，利用InputExComponent的特点做了
+简单的封装，随时会添加新功能，只是暂时没有遇到特别的需求。[源码](https://github.com/liyanq528/board-components-library/tree/master/projects/board-components-library/src/lib/input-array-ex);
+[Demo](https://github.com/liyanq528/board-components-library/tree/master/src/app/input-array-ex-demo)
+
+##### api
+
+名称 | 说明 | 输入(输出) | 默认值
+------- | ----------- | --------- | ---------
+inputCategory | 输入的类别：字符串、数字 | 输入 | 'string'
+inputIsRequired | 是否必须至少有一个值 | 输入 | false
+inputDisabled | 是否禁用 | 输入 | false
+... | ... | ... | ...
+inputArrayDefault | 设定默认值数组 | 输入 | false
+inputArrayFixed | 设定固定值数组，解决只是显示，但不能移除的数据
+commitEvent | 提交一个合法值时触发 | 输出 | EventEmitter<Array<InputArrayExType>>实例
