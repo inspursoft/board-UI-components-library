@@ -27,8 +27,8 @@ export class InputDropdownNumberComponent implements OnInit, CheckSelfValid, Aft
   @Input() max = 0;
   @Input() min = 0;
   @Input() disabled = false;
-  @Input() inUsedNumbers: Array<number>;
   @Input() label = '';
+  @Input() inUsedNumbers: Array<number>;
   @Input() validatorMessage: Array<{ key: string, message: string }>;
   @Input() menuHeader = '';
   @Input() tip = '';

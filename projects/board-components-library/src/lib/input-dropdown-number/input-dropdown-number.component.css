@@ -2,6 +2,10 @@ clr-dropdown-menu{
   margin-left: 10px;
 }
 
+.clr-focus {
+  background-color: transparent;
+}
+
 div.input-container{
   border-radius: 5px;
 }

@@ -3,6 +3,10 @@ div.clr-row {
   margin-right: 0 !important;
 }
 
+.clr-focus {
+  background-color: transparent;
+}
+
 button[clrDropdownItem] {
   margin-top: 5px;
   padding: 0;

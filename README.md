@@ -11,6 +11,12 @@
 组件库，利用Angular的组件(Component)概念，把这些需求封装起来，使开发时候更轻松，当然，目前的功能还很简单，需要大家长时间
 共同的努力，相信会越来越完善的。
 
+### 特点
+
+1. 全部模版化，ts代码量少。HTML中以标签的形式存在；
+2. 使用灵活，目前存在3中提供指定自定义模版的指令，供用户使用，以后还会完善。
+3. ...
+
 ### 环境要求
 1.X.X ---> angular7.2.0,clarity1.1.3,rxjs6.3.3
 
@@ -123,5 +129,27 @@ inputIsRequired | 是否必须至少有一个值 | 输入 | false
 inputDisabled | 是否禁用 | 输入 | false
 ... | ... | ... | ...
 inputArrayDefault | 设定默认值数组 | 输入 | false
-inputArrayFixed | 设定固定值数组，解决只是显示，但不能移除的数据
-commitEvent | 提交一个合法值时触发 | 输出 | EventEmitter<Array<InputArrayExType>>实例
+inputArrayFixed | 设定固定值数组，解决只是显示，但不能移除的数据 | 输入 | undefined
+commitEvent | 提交一个合法值时触发 | 输出 | EventEmitter实例
+
+### InputDropdownNumberComponent
+
+##### 说明
+由于这个组件同时处理字符串输入和数字输入时，有些难度，所以为了简单起见，目前只做了支持数字输入的组件InputDropdownNumberComponent。
+在InputExComponent与DropdownExComponent下拉框部分进行了封装，目的为了输入时动态显示合法的下拉框，并从中选出合适的选项。
+这个组件目前也是做的比较简单，只是在Board项目中使用了一次，诸如异步验证、多项选择等等稍复杂的功能都没有添加，等以后
+有需求时，再做修改；[源码](https://github.com/liyanq528/board-components-library/tree/master/projects/board-components-library/src/lib/input-dropdown-number);
+[Demo](https://github.com/liyanq528/board-components-library/tree/master/src/app/input-dropdown-number)
+
+##### api
+
+名称 | 说明 | 输入(输出) | 默认值
+------- | ----------- | --------- | ---------
+... | ... | ... | ...
+inUsedNumbers | 已经使用的数字数组 | 输入 | Array实例
+validatorMessage | 输入不合法时的提示信息数组 | 输入 | Array实例
+defaultActiveIndex | 默认的值的Index | 输入 | -1
+activeItem | 可以做为默认值来设置 | 输入 | undefined
+disabledFn | 设置选项是否为禁用的回调函数，同步的 | 输入 | undefined
+changeItem | 选择一个选项时候触发 | 输出 | EventEmitter实例
+
