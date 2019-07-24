@@ -2,6 +2,13 @@
    为了提升前端开发的工作效率和工作质量，把实际项目(Board)中的一部分前端代码抽离出来，结合实际的需求，
 形成了一系列的UI组件库，供所有前端开发者共同维护；
 
+## 浏览器支持
+
+![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png)
+--- | --- | --- | --- | --- | --- |
+11+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
+
+
 ### 来源
    我们用Angular框架开发前端项目的时候，需要用到各种个样的组件库，如[Material](https://material.angular.io/)，
 [Clarity](https://clarity.design/)等， 这样可以简化开发流程；但这些组件库并不是结合实际的需求而产生的。
@@ -152,4 +159,6 @@ defaultActiveIndex | 默认的值的Index | 输入 | -1
 activeItem | 可以做为默认值来设置 | 输入 | undefined
 disabledFn | 设置选项是否为禁用的回调函数，同步的 | 输入 | undefined
 changeItem | 选择一个选项时候触发 | 输出 | EventEmitter实例
+
+
 
