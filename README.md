@@ -42,7 +42,30 @@
 
 ### lib-input-ex
 
+##### 说明
 建立在[Clarity Input](https://clarity.design/documentation/input)的基础之上，利用Angular的响应式
 表单的概念[ReactiveForms](https://angular.cn/guide/reactive-forms)，添加了设定异步验证、设定同步验证、
 设定提示信息、默认值回写、合法性检查等功能。[源码](https://github.com/liyanq528/board-components-library/tree/master/projects/board-components-library/src/lib/input-array-ex);
 [Demo](https://github.com/liyanq528/board-components-library/tree/master/src/app/input-ex-demo)
+
+##### api
+
+名称 | 说明 | 输入(输出) | 默认值
+------- | ----------- | --------- | ---------
+inputIsRequired | 是否为必要输入 | 输入 | false
+inputCategory | 输入的类别：字符串、数字、密码、邮件 | 输入 | 字符串
+inputLabelWidth | 标签的宽度(单位:px) | 输入 | 180
+inputWidth | 整体宽度 | 输入 | '100%'
+inputType | 输入框类型:输入框、只能触发Click | 输入 | 输入框
+inputPattern | 验证输入的正则串 | 输入 | undefined
+... | ... | ... | ...
+sourcePassword | 是否为密码框,主要为了和确认密码框相互验证 | 输入 | false
+verifyPassword | 是否为验证密码框,主要为了和密码框相互验证 | 输入 | false
+validatorFns | 同步验证合法性的函数数组 | 输入 | undefined
+validatorAsyncFn | 异步验证函数 | 输入 | undefined
+validatorMessage | 非法时的提示信息数组 | 输入 | []
+inputUpdateOn | 输入框更新策略:'change'、'blur'、'submit' | 输入 | blur
+editEvent | 输入框进入编辑状态触发 | 输出 | EventEmitter<any>实例
+revertEvent | 返回上一个正确值触发 | 输出 | EventEmitter<any>实例
+commitEvent | 提交一个合法值触发 | 输出 | EventEmitter<any>实例
+valueChanges | 在输入值改变时触发 | 输出 | EventEmitter<any>实例

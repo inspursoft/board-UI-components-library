@@ -50,9 +50,9 @@ export class InputExComponent implements OnInit, CheckSelfValid {
   @Input() inputMinlength = 0;
   @Input() inputMax = 0;
   @Input() inputMin = 0;
+  @Input() inputPlaceholder = '';
   @Input() sourcePassword = false;
   @Input() verifyPassword = false;
-  @Input() inputPlaceholder = '';
   @Input() validatorFns: Array<ValidatorFn>;
   @Input() validatorAsyncFn: AsyncValidatorFn;
   @Input() validatorMessage: Array<{ key: string, message: string }>;
